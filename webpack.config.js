@@ -1,10 +1,11 @@
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // to be able to use relative paths, you need this:
 const path = require('path');
 const paths = {
-    DIST: path.resolve(__dirname, './web/js')
+    DIST: path.resolve(__dirname, './web')
 };
 
 // now configure the 'task' for webpack to run by default
@@ -15,13 +16,11 @@ module.exports = {
         squares: './src/Squares/squares',
     },
     output: {
-        // destination for transpiled javascript
         path: paths.DIST,
-        filename: '[name].js'
+        filename: 'js/[name].js'
     },
     module: {
-        // you can now transpile es2017 and react files
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -29,7 +28,15 @@ module.exports = {
                 query: {
                     presets: ['es2017', 'react']
                 }
-            }
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                }),
+                exclude: /node_modules/
+            },
         ]
     },
     plugins: [
@@ -39,7 +46,8 @@ module.exports = {
                 compress: { ecma: 5 },
                 warnings: true
             }
-        })
+        }),
+        new ExtractTextPlugin("css/[name].css")
     ],
     resolve: {
         // you can now require('file') instead of require('file.coffee')

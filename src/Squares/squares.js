@@ -1,4 +1,7 @@
 
+// import css
+import css from './css/index.css';
+
 // consider this to be the 'app' code for this component / spa.
 
 function retrieveParticipantId(url, request) {
@@ -7,7 +10,8 @@ function retrieveParticipantId(url, request) {
             // console.log('retrieved uuid: '+response.json().uuid); // synchronous. will not work.
 
             response.json().then((response) => {
-                console.log('retrieved uuid: '+response.uuid); // asynchronous. using a promise. works.
+                document.querySelector('#uuid').value = response.uuid;
+                //console.log('retrieved uuid: '+response.uuid); // asynchronous. using a promise. works.
             }).catch(error => {
                  return Promise.reject(console.log('JSON error: ' + error.message));
             });
@@ -25,9 +29,5 @@ function retrieveParticipantId(url, request) {
     });
 }
 
-retrieveParticipantId('https://httpbin.org/uuid');
-
-
-
-
+setInterval( () => { retrieveParticipantId('https://httpbin.org/uuid') }, 2500 );
 
