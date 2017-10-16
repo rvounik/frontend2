@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "@types/node": "^8.0.34",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-webpack": "^1.5.0",
+    "preact": "^8.2.5",
+    "preact-router": "^2.5.7",
+    "webpack-stream": "^4.0.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}
