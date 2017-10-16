@@ -10,7 +10,7 @@ export default class Circle extends Component {
 
     render() {
         return (
-            <p>testje</p>
+            <p>I am actually a Preact component</p>
         )
     }
 }

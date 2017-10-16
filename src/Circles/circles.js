@@ -1,5 +1,5 @@
 import { h, render } from 'preact';
-import Circle from './Circle/Circle';
+import Circle from './js/Circle/Circle';
 
 // import css
 import css from './css/index.css';
@@ -11,5 +11,5 @@ import css from './css/index.css';
 render(
     <Circle />,
     document.querySelector('body'),
-    document.querySelector('body').firstChild
+    document.querySelector('body').lastChild
 );

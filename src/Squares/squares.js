@@ -2,12 +2,10 @@
 // import css
 import css from './css/index.css';
 
-// consider this to be the 'app' code for this component / spa.
-
 function retrieveParticipantId(url, request) {
     fetch(url).then(response => {
         if (response.ok) {
-            // console.log('retrieved uuid: '+response.json().uuid); // synchronous. will not work.
+            // console.log('retrieved uuid: '+response.json().uuid); // synchronous. will not work. (that is why we needed thunk!)
 
             response.json().then((response) => {
                 document.querySelector('#uuid').value = response.uuid;
