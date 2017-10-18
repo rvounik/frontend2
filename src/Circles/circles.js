@@ -2,7 +2,7 @@ import { h, render } from 'preact';
 import Circle from './js/Circle/Circle';
 
 // import css
-import css from './css/index.css';
+import css from './css/circles.css';
 
 /** @jsx h */
 

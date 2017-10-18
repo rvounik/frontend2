@@ -1,5 +1,8 @@
 
+// to be able to minify / uglify JS, you need this:
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+// to be able to export css per bundle, you need this:
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // to be able to use relative paths, you need this:
@@ -8,12 +11,12 @@ const paths = {
     DIST: path.resolve(__dirname, './web')
 };
 
-// now configure the 'task' for webpack to run by default
+// configure the 'task' for webpack to run by default
 module.exports = {
     entry: {
         // extend this for each SPA bundle you want to generate
-        circles: './src/Circles/circles',
-        squares: './src/Squares/squares',
+        circles: './src/Circles/circles.js',
+        squares: './src/Squares/squares.js',
     },
     output: {
         path: paths.DIST,

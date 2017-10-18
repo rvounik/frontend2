@@ -1,31 +1,15 @@
+import { h, render } from 'preact';
+import Square from './js/Square/Square';
 
 // import css
-import css from './css/index.css';
+import css from './css/squares.css';
 
-function retrieveParticipantId(url, request) {
-    fetch(url).then(response => {
-        if (response.ok) {
-            // console.log('retrieved uuid: '+response.json().uuid); // synchronous. will not work. (that is why we needed thunk!)
+/** @jsx h */
 
-            response.json().then((response) => {
-                document.querySelector('#uuid').value = response.uuid;
-                //console.log('retrieved uuid: '+response.uuid); // asynchronous. using a promise. works.
-            }).catch(error => {
-                 return Promise.reject(console.log('JSON error: ' + error.message));
-            });
+// you can consider this to be the 'app' or master component that loads up the entire SPA for this route
 
-            return response;
-        }
-
-        if (response.status === 404) {
-            return Promise.reject(console.log('Endpoint error: ' + url));
-        }
-
-        return Promise.reject(console.log('HTTP error: ' + response.status));
-    }).catch(error => {
-        return Promise.reject(console.log('URL error: '+error.message));
-    });
-}
-
-setInterval( () => { retrieveParticipantId('https://httpbin.org/uuid') }, 2500 );
-
+render(
+    <Square />,
+    document.querySelector('body'),
+    document.querySelector('body').lastChild
+);
