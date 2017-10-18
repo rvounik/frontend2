@@ -19,6 +19,9 @@ const paths = {
 module.exports = {
     entry: {
         // extend this for each SPA bundle you want to generate
+        index: './src/index.js',
+        header: './src/Header/header.js',
+        inbox: './src/Inbox/inbox.js',
         circles: './src/Circles/circles.js',
         squares: './src/Squares/squares.js',
     },
@@ -71,6 +74,10 @@ module.exports = {
     ],
     resolve: {
         // you can now require('file') instead of require('file.coffee')
-        extensions: ['.js', '.json', '.coffee']
+        extensions: ['.js', '.json', '.coffee'],
+        alias: {
+            'react': 'preact-compat',
+            'react-dom': 'preact-compat'
+        }
     }
 };
