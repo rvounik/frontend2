@@ -1,8 +1,0 @@
-* {
-    color: green;
-    font-size: 20px;
-    border-radius: 20px;
-    display: flex;
-}
-
-/* this can be a sass index file or css import file or just a huge file with all css for the SPA */

@@ -1,22 +1,20 @@
-import { h, Component } from 'preact';
+import React from 'react';
 import Header from './../Header/header';
 
-/** @jsx h */
-
-export default class Inbox extends Component {
+export default class Inbox extends React.Component {
     constructor() {
         super();
     }
 
     render() {
-        // todo: when preact allows wrapper-less returns (like react 16+ does), remove the <section> wrapper tags
         return (
             <section>
                 <Header />
                 <section>
                     <p>
-                        Inbox content (which remains the starting page/app)
+                        Inbox content (the starting page/app in neon)
                     </p>
+                    <p>would be nice to have this as a PWA at some point that uses preact instead of react</p>
                 </section>
             </section>
         )

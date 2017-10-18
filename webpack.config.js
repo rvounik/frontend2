@@ -19,11 +19,12 @@ const paths = {
 module.exports = {
     entry: {
         // extend this for each SPA bundle you want to generate
+        // remember: every app configured here will have its own .js and its own .css with all JS and CSS of itself and its children combined
         index: './src/index.js',
         header: './src/Header/header.js',
         inbox: './src/Inbox/inbox.js',
-        circles: './src/Circles/circles.js',
-        squares: './src/Squares/squares.js',
+        organisations: './src/Organisations/organisations.js',
+        tasks: './src/Tasks/tasks.js',
     },
     output: {
         path: paths.DIST,
@@ -36,7 +37,7 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
-                    presets: ['es2017', 'react']
+                    presets: ['es2015', 'react']
                 }
             },
             {
@@ -75,9 +76,9 @@ module.exports = {
     resolve: {
         // you can now require('file') instead of require('file.coffee')
         extensions: ['.js', '.json', '.coffee'],
-        alias: {
-            'react': 'preact-compat',
-            'react-dom': 'preact-compat'
-        }
+        // alias: {
+        //     'react': 'preact-compat',
+        //     'react-dom': 'preact-compat'
+        // }
     }
 };

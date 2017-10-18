@@ -1,18 +1,18 @@
-import { h, Component } from 'preact';
+import React from 'react';
 import Navigation from './js/Navigation/Navigation';
 
-/** @jsx h */
-
-export default class Header extends Component {
+export default class Header extends React.Component {
     constructor() {
         super();
     }
 
     render() {
+        let items = [ {label: 'organisations', link: '/organisations'}, { label: 'tasks', link:'/tasks'} ];
+
         return (
             <header>
                 logo
-                <Navigation />
+                <Navigation items={ items } />
             </header>
         )
     }

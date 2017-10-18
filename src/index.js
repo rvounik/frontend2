@@ -1,26 +1,10 @@
-import { Router } from 'preact-router';
-import { h, Component, render } from 'preact';
-/** @jsx h */
+import React from 'react';
+import ReactDOM from 'react-dom'; // only needed for initial render into a DOM node
+import Inbox from '../src/Inbox/inbox';
 
-const Inbox = () => (
-    <div>
-        inbox content goes here
-    </div>
+ReactDOM.render(
+    <main>
+        <Inbox />
+    </main>,
+    document.getElementById('hook')
 );
-
-const Error = () => (
-    <div>
-        Page not found
-    </div>
-);
-
-const App = () => (
-    <div className="app">
-        <Router>
-            <Inbox path="/inbox" />
-            <Error path="/error" default />
-        </Router>
-    </div>
-);
-
-render(<App />, document.body);

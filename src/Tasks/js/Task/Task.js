@@ -1,8 +1,6 @@
-import { h, Component } from 'preact';
+import React from 'react';
 
-/** @jsx h */
-
-export default class Square extends Component {
+export default class Task extends React.Component {
     constructor() {
         super();
     }
