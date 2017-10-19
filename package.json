@@ -1,4 +1,6 @@
 {
+  "name": "frontend2",
+  "license": "UNLICENSED",
   "devDependencies": {
     "@types/node": "^8.0.34",
     "autoprefixer": "^7.1.5",

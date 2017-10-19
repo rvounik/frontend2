@@ -1,4 +1,5 @@
 import React from 'react';
+import css from './css/inbox.css';
 
 export default class Inbox extends React.Component {
     constructor() {
@@ -7,7 +8,7 @@ export default class Inbox extends React.Component {
 
     render() {
         return (
-            <section className="clear">
+            <section className="clear inbox">
                 <section>
                     <p>
                         Inbox content: the starting page (app?) in neon

@@ -14,3 +14,10 @@ Rebuild our current Frontend as a standalone SPA Javascript application with the
 - Fetch instead of Ajax
 - Sourcemaps for JS and CSS
 - Aria support
+
+Quick start:
+
+- run yarn install
+- yarn run build
+- php -S
+

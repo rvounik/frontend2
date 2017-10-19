@@ -17,4 +17,4 @@ ReactDOM.render((
     <BrowserRouter>
         <App />
     </BrowserRouter>
-), document.getElementById('hook').parentNode);
+), document.getElementById('app'));

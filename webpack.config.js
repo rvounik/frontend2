@@ -1,34 +1,35 @@
 
+// this is used to minify / uglify processed JS
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+// this is used to extract the css imports from the JS components
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// will clean the web folders so it is certain new files are copied in
+// this is used to clean out the assets folder everytime a new build is started
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 let cleanOptions = {
-    exclude:  [],
-    verbose:  true
+    exclude: [],
+    verbose: false
 };
 
-// to be able to use relative paths, you need this:
+// this is needed to be able to use relative paths
 const path = require('path');
 const paths = {
     DIST: path.resolve(__dirname, './web')
 };
 
-// configure the 'task' for webpack to run by default
+// configure the 'task' for webpack to run by default (webpack) or, if configured, when using npm script: yarn run build
 module.exports = {
     entry: {
-        // extend this for each SPA bundle you want to generate
-        // remember: every app configured here will have its own .js and its own .css with all JS and CSS of itself and its children combined
-        index: './src/index.js',
-        header: './src/js/Header/header.js',
-        inbox: './src/js/Inbox/inbox.js',
-        organisations: './src/js/Organisations/organisations.js',
-        tasks: './src/js/Tasks/tasks.js',
+        // each entry point added here will become a bundle of ALL js and ALL css encountered in itself and its children
+        // with this you can build separate, independent SPA's (which is no longer needed, hence the single 'index' app)
+        index: './src/index.js'
     },
     output: {
         path: paths.DIST,
-        filename: 'js/[name].js'
+        filename: 'js/[name].js',
+        // todo: fix generation of JS sourcemaps
+        sourceMapFilename: '[file].map'
     },
     module: {
         rules: [
@@ -37,24 +38,47 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
+                    // todo: consider upgrading to es2017
                     presets: ['es2015', 'react']
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
+                // will extract scss (sass) from javascript bundles
                 loader: ExtractTextPlugin.extract({
-                    // will extract css from javascript bundles
                     fallback: "style-loader",
                     use: [
                         {
-                            // will handle the extracted css as ordinary css
+                            // will handle the extracted scss as ordinary css (should be first in list of loaders)
                             loader: "css-loader",
                             options: {
+                                // ensures imports are handled first
                                 importLoaders: 1,
+                                sourceMap: true
                             }
                         },
                         {
+                            // will process resulting css with postcss and its modules as configured in postcss.config.js
                             loader: 'postcss-loader'
+                        }
+                    ]
+                }),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                // will extract css from javascript bundles
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            // will handle the extracted css as ordinary css (should be first in list of loaders)
+                            loader: "css-loader",
+                            options: {
+                                // ensures imports are handled first
+                                importLoaders: 1,
+                                sourceMap: true
+                            }
                         }
                     ]
                 }),
@@ -67,8 +91,11 @@ module.exports = {
         new UglifyJSPlugin({
             uglifyOptions: {
                 sourceMap: true,
-                compress: { ecma: 5 },
-                warnings: true
+                parallel: true,
+                compress: {
+                    ecma: 5
+                },
+                warnings: false
             }
         }),
         new ExtractTextPlugin("css/[name].css")
@@ -76,6 +103,7 @@ module.exports = {
     resolve: {
         // you can now require('file') instead of require('file.coffee')
         extensions: ['.js', '.json', '.coffee'],
+        // when using preact, this adds some aliases so external dependencies will continue to work
         // alias: {
         //     'react': 'preact-compat',
         //     'react-dom': 'preact-compat'

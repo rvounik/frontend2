@@ -1,6 +1,6 @@
 import React from 'react';
 import Task from './js/Task/Task';
-import css from './css/tasks.css';
+import css from './css/tasks.scss';
 
 export default class Tasks extends React.Component {
     constructor() {
