@@ -39,16 +39,17 @@ export default class Task extends React.Component {
 
     render() {
         return (
-            <p>
-                <br/><br/>
-                You can add projects here: <button onClick={ () => this.apiEndpointRequest('https://httpbin.org/uuid') } type="button">Add project</button>
-                <br/><br/>
-                That will actually perform a Fetch request to a real API endpoint and when the request returns 'ok', append the element below.
+            <section>
+                <p>
+                    You can add projects here: <button onClick={ () => this.apiEndpointRequest('https://httpbin.org/uuid') } type="button">Add project</button>
+                    <br/><br/>
+                    That will actually perform a Fetch request to a real API endpoint and when the request returns 'ok', append the element below.
+                </p>
                 <ul id="project-list">
                     <li>An existing project</li>
                     <li>Another existing project</li>
                 </ul>
-            </p>
+            </section>
         )
     }
 }

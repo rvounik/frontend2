@@ -21,10 +21,10 @@ module.exports = {
         // extend this for each SPA bundle you want to generate
         // remember: every app configured here will have its own .js and its own .css with all JS and CSS of itself and its children combined
         index: './src/index.js',
-        header: './src/Header/header.js',
-        inbox: './src/Inbox/inbox.js',
-        organisations: './src/Organisations/organisations.js',
-        tasks: './src/Tasks/tasks.js',
+        header: './src/js/Header/header.js',
+        inbox: './src/js/Inbox/inbox.js',
+        organisations: './src/js/Organisations/organisations.js',
+        tasks: './src/js/Tasks/tasks.js',
     },
     output: {
         path: paths.DIST,

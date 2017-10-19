@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import css from './css/navigation-item.css';
 
 export default class navigationItem extends React.Component {
@@ -10,7 +11,7 @@ export default class navigationItem extends React.Component {
         let { label, link } = this.props;
 
         return (
-            <li className="navigation-item"><a href={ link }>{ label }</a></li>
+            <li className="navigation-item"><Link to={ link }>{ label }</Link></li>
         )
     }
 }
