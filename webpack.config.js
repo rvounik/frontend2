@@ -31,6 +31,7 @@ module.exports = {
         // todo: fix generation of JS sourcemaps
         sourceMapFilename: '[file].map'
     },
+    devtool: 'eval-source-map',
     module: {
         rules: [
             {
