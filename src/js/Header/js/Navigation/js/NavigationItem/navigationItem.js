@@ -1,8 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import { h, Component } from 'preact';
+/** @jsx h */
+
 import css from './css/navigation-item.css';
 
-export default class navigationItem extends React.Component {
+export default class navigationItem extends Component {
     constructor() {
         super();
     }
@@ -11,7 +12,7 @@ export default class navigationItem extends React.Component {
         let { label, link } = this.props;
 
         return (
-            <li className="navigation-item"><Link to={ link }>{ label }</Link></li>
+            <li className="navigation-item"><a href={ link }>{ label }</a></li>
         )
     }
 }

@@ -1,6 +1,7 @@
-import React from 'react';
-
-export default class Organisation extends React.Component {
+//import React from 'react';
+import { h, Component } from 'preact';
+/** @jsx h */
+export default class Organisation extends Component {
     constructor() {
         super();
     }

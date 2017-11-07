@@ -1,7 +1,9 @@
-import React from 'react';
+//import React from 'react';
+import { h, Component } from 'preact';
+/** @jsx h */
 import css from './css/inbox.css';
 
-export default class Inbox extends React.Component {
+export default class Inbox extends Component {
     constructor() {
         super();
     }

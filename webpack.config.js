@@ -18,6 +18,9 @@ const paths = {
     DIST: path.resolve(__dirname, './web')
 };
 
+// does not seem to be needed?
+let globalSourceMap = false;
+
 // configure the 'task' for webpack to run by default (webpack) or, if configured, when using npm script: yarn run build
 module.exports = {
     entry: {
@@ -28,7 +31,6 @@ module.exports = {
     output: {
         path: paths.DIST,
         filename: 'js/[name].js',
-        // todo: fix generation of JS sourcemaps
         sourceMapFilename: '[file].map'
     },
     devtool: 'eval-source-map',
@@ -39,8 +41,7 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
-                    // todo: consider upgrading to es2017
-                    presets: ['es2015', 'react']
+                    presets: ['es2017', 'react']
                 }
             },
             {
@@ -55,7 +56,7 @@ module.exports = {
                             options: {
                                 // ensures imports are handled first
                                 importLoaders: 1,
-                                sourceMap: true
+                                sourceMap: globalSourceMap
                             }
                         },
                         {
@@ -78,7 +79,7 @@ module.exports = {
                             options: {
                                 // ensures imports are handled first
                                 importLoaders: 1,
-                                sourceMap: true
+                                sourceMap: globalSourceMap
                             }
                         }
                     ]
@@ -91,7 +92,7 @@ module.exports = {
         new CleanWebpackPlugin(['web/js','web/css'], cleanOptions),
         new UglifyJSPlugin({
             uglifyOptions: {
-                sourceMap: true,
+                sourceMap: globalSourceMap,
                 parallel: true,
                 compress: {
                     ecma: 5
@@ -105,9 +106,9 @@ module.exports = {
         // you can now require('file') instead of require('file.coffee')
         extensions: ['.js', '.json', '.coffee'],
         // when using preact, this adds some aliases so external dependencies will continue to work
-        // alias: {
-        //     'react': 'preact-compat',
-        //     'react-dom': 'preact-compat'
-        // }
+        alias: {
+            'react': 'preact-compat',
+            'react-dom': 'preact-compat'
+        }
     }
 };

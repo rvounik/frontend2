@@ -1,8 +1,11 @@
-import React from 'react';
+//import React from 'react';
+import { h, Component } from 'preact';
+
+/** @jsx h */
 import NavigationItem from './js/NavigationItem/navigationItem';
 import css from './css/navigation.css';
 
-export default class Navigation extends React.Component {
+export default class Navigation extends Component {
     constructor() {
         super();
     }

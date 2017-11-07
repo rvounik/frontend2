@@ -1,10 +1,12 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import Router from 'preact-router';
+import { h, Component } from 'preact';
+/** @jsx h */
+
 import Inbox from './Inbox/inbox'
 import Organisations from './Organisations/organisations'
 import Tasks from './Tasks/tasks'
 
-export default class Main extends React.Component {
+export default class Main extends Component {
     constructor() {
         super();
     }
@@ -15,11 +17,11 @@ export default class Main extends React.Component {
     render() {
         return (
             <main>
-                <Switch>
-                    <Route exact path='/' component={ Inbox } />
-                    <Route exact path='/organisations' component={ Organisations } />
-                    <Route path='/tasks' component={ Tasks } />
-                </Switch>
+                <Router>
+                    <Inbox exact path='/' />
+                    <Organisations exact path='/organisations' />
+                    <Tasks path='/tasks' />
+                </Router>
             </main>
         )
     }

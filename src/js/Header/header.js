@@ -1,8 +1,13 @@
-import React from 'react';
+// import React from 'react';
+
+import { h, Component } from 'preact';
+
+/** @jsx h */
+
 import Navigation from './js/Navigation/navigation';
 import css from './css/header.css';
 
-export default class Header extends React.Component {
+export default class Header extends Component {
     constructor() {
         super();
     }

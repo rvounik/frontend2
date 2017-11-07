@@ -1,8 +1,10 @@
-import React from 'react';
+//import React from 'react';
+import { h, Component } from 'preact';
+/** @jsx h */
 import Organisation from './js/Organisation/Organisation';
 import css from './css/organisations.css';
 
-export default class Organisations extends React.Component {
+export default class Organisations extends Component {
     constructor() {
         super();
     }
