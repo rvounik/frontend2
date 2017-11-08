@@ -1,11 +1,8 @@
-// import React from 'react';
-
 import { h, Component } from 'preact';
-
 /** @jsx h */
 
-import Navigation from './js/Navigation/navigation';
-import css from './css/header.css';
+import Navigation from './js/Navigation/Navigation';
+import css from './css/header';
 
 export default class Header extends Component {
     constructor() {

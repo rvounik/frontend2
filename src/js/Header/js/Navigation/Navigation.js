@@ -1,9 +1,8 @@
-//import React from 'react';
 import { h, Component } from 'preact';
-
 /** @jsx h */
-import NavigationItem from './js/NavigationItem/navigationItem';
-import css from './css/navigation.css';
+
+import NavigationItem from './js/NavigationItem/NavigationItem';
+import css from './css/navigation';
 
 export default class Navigation extends Component {
     constructor() {
@@ -12,8 +11,9 @@ export default class Navigation extends Component {
 
     render() {
         let navigationItems = [];
+        let { items } = this.props;
 
-        this.props.items.map((item) => {
+        items.map((item) => {
             let navigationItem = <NavigationItem label={ item.label } link={ item.link } key={ item.label } />;
 
             navigationItems.push(navigationItem);

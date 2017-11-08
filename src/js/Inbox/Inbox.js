@@ -1,7 +1,7 @@
-//import React from 'react';
 import { h, Component } from 'preact';
 /** @jsx h */
-import css from './css/inbox.css';
+
+import css from './css/inbox';
 
 export default class Inbox extends Component {
     constructor() {

@@ -1,10 +1,10 @@
 import { h, render } from 'preact';
 /** @jsx h */
 
-import App from './js/App';
+import App from './App';
 
 // general CSS rules are loaded here
-import css from './css/generic.css';
+import css from './../css/generic';
 
 render(
     <App />,

@@ -1,6 +1,6 @@
-//import React from 'react';
 import { h, Component } from 'preact';
 /** @jsx h */
+
 export default class Task extends Component {
     constructor() {
         super();

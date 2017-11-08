@@ -3,7 +3,7 @@
 <head>
     <title>frontend2</title>
 
-    <link rel="stylesheet" href="./web/css/index.css">
+    <link rel="stylesheet" href="/web/css/index.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -29,10 +29,16 @@
 
 <div id="app"></div>
 
-<script src="./web/js/index.js"></script>
 <noscript>This application requires Javascript to function properly. Please enable this in your web browser.</noscript>
+
+<!-- first configure the service-worker -->
+<script src="web/js/common.js"></script>
+
+<!-- Babel can’t support all of ES6 with compilation alone — it also requires some runtime support using a polyfill -->
+<script src="web/js/polyfill.js"></script>
+
+<!-- last, load the bundled, es5-transpiled app code -->
+<script src="web/js/index.js"></script>
 
 </body>
 </html>
-
-
