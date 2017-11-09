@@ -2,7 +2,7 @@
 let sourceMapsEnabled = false;
 let gzippedAssets = false;
 
-/**********************************************************************************************************************/
+/* define plugins *****************************************************************************************************/
 
 // this is used to minify / uglify processed JS
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -20,7 +20,7 @@ let cleanOptions = {
 // this allows GZipping assets (JS, CSS), requires server config: https://varvy.com/pagespeed/enable-compression.html
 const CompressionPlugin = require('compression-webpack-plugin');
 
-// this allows the use of relative paths
+// this allows the use of relative paths (see below)
 const path = require('path');
 const paths = {
     DIST: path.resolve(__dirname, './web')
@@ -29,10 +29,7 @@ const paths = {
 // this is used to copy static assets over to the web folder
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-let globalSourceMap = sourceMapsEnabled;
-let sourceMapDevTool = sourceMapsEnabled ? 'cheap-module-eval-source-map' : false;
-
-/**********************************************************************************************************************/
+/* configure webpack **************************************************************************************************/
 
 // configure the 'task' for Webpack to run by default (Webpack) or, if configured, when using NPM script: Yarn run build
 module.exports = {
@@ -48,7 +45,7 @@ module.exports = {
         filename: 'js/[name].js',
         sourceMapFilename: '[file].map'
     },
-    devtool: sourceMapDevTool,
+    devtool: sourceMapsEnabled ? 'cheap-module-eval-source-map' : false,
     module: {
         rules: [
             {
@@ -60,8 +57,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
-                // will extract SCSS (SASS) imports from Javascript bundles
+                test: /\.scss$|\.sass$|\.css$/,
+                // will extract SCSS, SASS and CSS imports from Javascript bundles
                 loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: [
@@ -71,48 +68,32 @@ module.exports = {
                             options: {
                                 // ensures imports are handled first
                                 importLoaders: 1,
-                                sourceMap: globalSourceMap
+                                sourceMap: sourceMapsEnabled
                             }
                         },
                         {
-                            // will process resulting css with PostCSS and its modules as configured in postcss.config.js
+                            // process resulting css with PostCSS and its modules as configured in postcss.config.js
                             loader: 'postcss-loader'
                         }
                     ]
                 }),
                 exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                // will extract CSS imports from Javascript bundles
-                loader: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            // will handle the extracted CSS as ordinary CSS (should be first in list of loaders)
-                            loader: "css-loader",
-                            options: {
-                                // ensures imports are handled first
-                                importLoaders: 1,
-                                sourceMap: globalSourceMap
-                            }
-                        }
-                    ]
-                }),
-                exclude: /node_modules/
-            },
+            }
         ]
     },
     plugins: [
         new CleanWebpackPlugin(['web/js','web/css'], cleanOptions),
         new UglifyJSPlugin({
             uglifyOptions: {
-                sourceMap: globalSourceMap,
+                sourceMap: sourceMapsEnabled,
                 parallel: true,
                 compress: {
-                    ecma: 5
+                    ecma: 5,
+                    warnings: false
                 },
-                warnings: false
+                output: {
+                    comments: false
+                }
             }
         }),
         new ExtractTextPlugin("css/[name].css"),
@@ -120,18 +101,17 @@ module.exports = {
             asset: "[path].gz[query]",
             algorithm: "gzip",
             test: /\.js$|\.css$|\.html$/,
-            threshold: gzippedAssets ? 512 : 100000000,
-            minRatio: .5,
+            threshold: gzippedAssets ? 1 : 100000000,
+            minRatio: .9,
             deleteOriginalAssets: false
         }),
         new CopyWebpackPlugin([
-            // {output}/file.txt
             { from: './src/assets', to: './assets' },
         ])
     ],
     resolve: {
-        // you can now import or require 'file' instead of 'file.js'
-        extensions: ['.js', '.css', '.scss'],
+        // to be able to import or require 'file' instead of 'file.js'
+        extensions: ['.js', '.scss', '.sass', '.css'],
         // when using Preact, this adds some aliases so external dependencies will continue to work
         alias: {
             'react': 'preact-compat',

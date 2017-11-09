@@ -18,8 +18,8 @@ export default class Header extends Component {
         ];
 
         return (
-            <header>
-                <figure className="logo">logo</figure>
+            <header className="header">
+                <figure className="logo"></figure>
                 <Navigation items={ items } />
             </header>
         )

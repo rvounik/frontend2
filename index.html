@@ -2,32 +2,35 @@
 <html lang="en">
 <head>
     <title>frontend2</title>
+    <meta charset="utf-8">
+    <meta name="description" content="A description of the page">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="google" content="notranslate">
+    <meta name="google" content="nositelinkssearchbox">
 
-    <link rel="stylesheet" href="/web/css/index.css">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="format-detection" content="telephone=no">
+    <!-- manifest, icons and configuration for PWA functionality -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="web/assets/images/launcher-icon-3x.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, shrink-to-fit=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="application-name" content="neon">
     <meta name="theme-color" content="#ffffff">
-
-    <!-- Add manifest -->
-    <link rel="manifest" href="/manifest.json">
-    <!-- Add to home screen for Safari on iOS -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="neon">
-    <link rel="apple-touch-icon" href="web/assets/image/launcher-icon-3x.png">
-    <!-- Tile Icon for Windows -->
-    <meta name="msapplication-TileImage" content="web/assets/image/launcher-icon-3x.png">
+    <meta name="msapplication-TileImage" content="web/assets/images/launcher-icon-3x.png">
     <meta name="msapplication-TileColor" content="#ff0000">
+
+    <!-- external (vendor) javascript and css includes -->
+    <link rel="stylesheet" href="/web/css/index.css">
 </head>
 
 <body>
 
-<div id="app"></div>
+<div id="application"></div>
 
 <noscript>This application requires Javascript to function properly. Please enable this in your web browser.</noscript>
 

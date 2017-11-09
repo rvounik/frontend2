@@ -4,6 +4,8 @@ import { h, Component } from 'preact';
 import Header from './Header/Header';
 import Main from './Main';
 
+/* consider this the 'Master' application */
+
 export default class App extends Component {
     constructor() {
         super();

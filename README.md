@@ -4,25 +4,38 @@
 Rebuild our current Frontend as a standalone SPA Javascript application with the following specs:
 
 # Features
-
-- React 16 or, even better, Preact (and preact-compat)
-- Redux
-- Routing (native, not symfony)
-- Webpack
+Deployment
+- Webpack for task automation / bundling of files
 - NPM Scripts instead of Gulp / Grunt
-- (very) fast building of assets
-- Yarn instead of NPM
-- PostCSS with NextCSS and Autoprefixer (and SASS support)
-- Code splitting for Javascript and CSS
-- es2017
-- transpiles to es5 + polyfill (uglified / minified)
-- CSS Grid (replacing Bootstrap and Flexbox)
+- Yarn instead of NPM (improved caching of dependencies)
+- JS and CSS code is bundled, uglified, minified and comments stripped
 - Sourcemaps for JS and CSS
+
+HTML and CSS
+- Behaves like a Progressive Web Application (manifest.json)
+- Fully HTML5, CSS3 compliant
+- Able to work offline (service-worker)
+- CSS modules (CSS locally scoped and imported by the JS component)
+- support for CSS, SCSS, SASS (import without extension)
+- PostCSS with NextCSS and Autoprefixer (and SASS support)
+- CSS Grid (replacing Bootstrap and Flexbox)
 - Aria support
+
+Javascript
+- Preact (with preact-compat) replaces React
+- Redux (with thunk?) for state management
+- Native Preact Routing (not Symfony)
+- support for ES2017 that transpiles to es5 (with polyfill)
+- Fully component based (master-slave pattern)
+
+Performance
 - Very fast delivery using Gzipped assets and lazy loading
-- Communicates (with Fetch, instead of Ajax) with Sexy Field endpoints
-- Replaces current frontend (and, if possible, styleguide)
-- Has a way to implement access rights (using roles) and translations
+- Much faster building of assets (and no more syncing issues?)
+
+Integration
+- Communicates (using Fetch, instead of Ajax) with *Sexy Field* endpoints
+- Replaces current frontend (and, if possible, *Styleguide*)
+- Has a way to implement access rights (roles) and translations
 
 # Quick start
 
@@ -35,9 +48,12 @@ to add dependencies:
 
 - type: yarn add <package> --dev
 
-# Todo
+Docker support will follow later.
 
-- move to githost
+# Todo
+- how to do unit tests
+- how to do linting
+- move repository to githost
 - view some webpack config examples to see if the current config is really how it should be (seems messy)
 - check the article about project set up and see if this one matches
 - add example CSS Grid implementation
@@ -50,3 +66,4 @@ to add dependencies:
 - add aria support for visually impaired
 - decide what to do with styleguide (may I recommend merging into frontend?)
 - figure out where the translations are loaded from
+- add Dockerfile so a docker image can be built and frontend can run as a docker container

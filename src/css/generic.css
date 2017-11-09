@@ -1,9 +1,0 @@
-/* in here only general css should be placed that is not tied to a component */
-
-* {
-    margin: 0;
-}
-
-.clear {
-    clear: both;
-}

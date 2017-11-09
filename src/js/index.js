@@ -1,12 +1,13 @@
 import { h, render } from 'preact';
+import AsyncRoute from 'preact-async-route';
 /** @jsx h */
 
-import App from './App';
+// general CSS rules are loaded here (keep this above the JS imports since this CSS needs to be on top)
+import css from './../css/common';
 
-// general CSS rules are loaded here
-import css from './../css/generic';
+import App from './components/App';
 
 render(
     <App />,
-    document.getElementById('app')
+    document.getElementById('application')
 );
