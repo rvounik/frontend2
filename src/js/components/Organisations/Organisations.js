@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import classNames from 'classnames';
 /** @jsx h */
 
 import Organisation from './js/Organisation/Organisation';
@@ -11,7 +12,7 @@ export default class Organisations extends Component {
 
     render() {
         return (
-            <section className="clear organisations">
+            <section className={ classNames('clear', css.organisations) } >
                 <section>
                     <Organisation label={ 'label' } />
                 </section>

@@ -44,6 +44,10 @@ Integration
 - php -S 127.0.0.1:9000
 - go there
 
+to run tests:
+
+- type: yarn run test
+
 to add dependencies:
 
 - type: yarn add <package> --dev
@@ -51,11 +55,10 @@ to add dependencies:
 Docker support will follow later.
 
 # Todo
-- how to do unit tests
+- finish css module set up: find out how to exclude the common.scss definitions from selector name transformation so
+  they are applied to each JS component and thus can contain generic css
 - how to do linting
 - move repository to githost
-- view some webpack config examples to see if the current config is really how it should be (seems messy)
-- check the article about project set up and see if this one matches
 - add example CSS Grid implementation
 - add redux (and thunk, if needed)
 - figure out how application can load/show only the components the user has access to

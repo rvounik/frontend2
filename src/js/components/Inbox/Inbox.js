@@ -10,7 +10,7 @@ export default class Inbox extends Component {
 
     render() {
         return (
-            <section className="clear inbox">
+            <section className={ css.inbox }>
                 <section>
                     <p>
                         Inbox content: the starting page (app?) in neon

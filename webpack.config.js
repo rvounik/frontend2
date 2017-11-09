@@ -66,8 +66,11 @@ module.exports = {
                             // will handle the extracted SCSS as ordinary CSS (should be first in list of loaders)
                             loader: "css-loader",
                             options: {
-                                // ensures imports are handled first
+                                // will move any encountered @import statements to the top of the generated css
                                 importLoaders: 1,
+                                // enables css modules where css is automatically tied to a js component by name
+                                modules: true,
+                                // defines source maps
                                 sourceMap: sourceMapsEnabled
                             }
                         },
@@ -77,12 +80,12 @@ module.exports = {
                         }
                     ]
                 }),
-                exclude: /node_modules/
+                exclude: '/node_modules/'
             }
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(['web/js','web/css'], cleanOptions),
+        new CleanWebpackPlugin(['web/assets', 'web/js','web/css'], cleanOptions),
         new UglifyJSPlugin({
             uglifyOptions: {
                 sourceMap: sourceMapsEnabled,

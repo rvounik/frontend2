@@ -11,7 +11,7 @@ export default class Tasks extends Component {
 
     render() {
         return (
-            <section className="tasks clear">
+            <section className={ css.tasks }>
                 <section>
                     <Task />
                 </section>

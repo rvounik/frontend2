@@ -9,6 +9,11 @@ export default class Header extends Component {
         super();
     }
 
+    // just a simple method to test the mocha integration
+    addNumbers(a, b) {
+        return a + b;
+    }
+
     render() {
         // assume this list of nodes is provided by the authentication service
         let items = [
@@ -18,7 +23,7 @@ export default class Header extends Component {
         ];
 
         return (
-            <header className="header">
+            <header className={ css.header }>
                 <figure className="logo"></figure>
                 <Navigation items={ items } />
             </header>
