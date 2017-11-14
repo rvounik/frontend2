@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 /** @jsx h */
 
 import Navigation from './js/Navigation/Navigation';
-import css from './css/header';
+import css from './css/header.scss';
 
 export default class Header extends Component {
     constructor() {
