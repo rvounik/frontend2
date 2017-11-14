@@ -1,4 +1,4 @@
-// Mocks localStorage
+// Mocks localStorage (currently unused)
 const localStorageMock = (function() {
     let store = {};
 

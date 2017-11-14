@@ -1,17 +1,12 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import Navigation from './Navigation/js/Navigation';
-import css from './../css/header.scss';
+import Navigation from './components/Navigation/js/Navigation';
+import style from './style/style';
 
 export default class Header extends Component {
     constructor() {
         super();
-    }
-
-    // just a simple method to test the mocha integration
-    addNumbers(a, b) {
-        return a + b;
     }
 
     render() {
@@ -23,7 +18,7 @@ export default class Header extends Component {
         ];
 
         return (
-            <header className={ css.header }>
+            <header className={ style.header }>
                 <figure className="logo"></figure>
                 <Navigation items={ items } />
             </header>

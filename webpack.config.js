@@ -1,6 +1,6 @@
 
 let sourceMapsEnabled = false;
-let gzippedAssets = false;
+let gzippedAssets = true;
 
 /* define plugins *****************************************************************************************************/
 
@@ -36,8 +36,8 @@ module.exports = {
     entry: {
         // each entry point added here will become bundles of all JS and all CSS encountered in itself and its children
         // with this you can build separate, independent SPA's if required (or just bundle all in a single 'index' App)
-        index: './src/js/index.js',
-        common: './src/js/common.js',
+        app: './src/js/App.js',
+        common: './src/js/utils/common.js',
         polyfill: './node_modules/babel-polyfill/dist/polyfill.min.js',
     },
     output: {

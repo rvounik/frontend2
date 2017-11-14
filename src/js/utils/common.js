@@ -1,5 +1,4 @@
 // performs feature query for navigator, then initialises service worker
-
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('service-worker.js').then(function (registration) {

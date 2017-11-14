@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import Task from './Task/js/Task';
-import css from './../css/tasks';
+import Task from './components/Task/components/Task';
+import css from './style/tasks';
 
 export default class Tasks extends Component {
     constructor() {

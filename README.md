@@ -40,7 +40,7 @@ Integration
 # Quick start
 
 - run: yarn install
-- type: yarn run build --watch
+- type: yarn run build (--watch)
 - php -S 127.0.0.1:9000
 - go there
 
@@ -58,7 +58,6 @@ Docker support will follow later.
 - finish css module set up: find out how to exclude the common.scss definitions from selector name transformation so
   they are applied to each JS component and thus can contain generic css
 - implement JS and CSS linting
-- set up testing
 - move repository to githost
 - add example CSS Grid implementation
 - add redux (and thunk, if needed)
@@ -72,14 +71,9 @@ Docker support will follow later.
 - figure out where the translations are loaded from
 - add Dockerfile so a docker image can be built and frontend can run as a docker container
 
+----------------------------------
 
-
-
-
-
-
-# about testing
-
+# About tests
 In the Frontend we should mostly be concerned with Functional Tests (also called Integration Tests). This is because
 the Frontend is aimed at the end user and as such it should be tested from the end user perspective. For the end user
 it does not matter much how something works, it is more important to know that it works. This is different from Unit
@@ -87,45 +81,51 @@ Testing in other parts of the application that do not face the end user. You wan
 is clicked, a certain value in some other part of the application is changed. So this covers integration, interaction
 and functionality. It should also be possible to test state mutations, since we use (p)react a lot.
 
-# For all this we need:
+----------------------------------
 
-1. a test runner (like karma)
-2. a testing framework (like mocha, jasmine, enzyme, jest)
-3. a (virtual) DOM (like phantomjs, chrome headless, selenium, jsdom)
+# About package.json (since it supports no comments)
+You can mock the CSS by using identity-obj-proxy
 
-often you'll find suites that combine these requirements into one package. one of those is preact-render-spy.
+"jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  }
 
-# some learnings
+I have for now removed this from dependencies
 
-- Noticed PhantomJS is no longer developed
-- Hearing good things about Enzyme (which uses jsdom instead of phantomjs)
-- also Jest is using JSDom (and Jest is recommended by preact-boilerplate and facebook)
-- Read into shallow rendering and decided we need this to do isolated tests
-- Found preact-render-spy package, which does shallow rendering and uses jsdom / jest (and supports preact)
+# dependencies
 
-# important features of  preact-render-spy
+"@types/node": "^8.0.34" node descriptions
+"autoprefixer": "^7.1.5", automaticaly inserts css vendor prefixes
+"babel-core": "^6.26.0", core files of babel used to transpile es2015 to es5
+"babel-jest": "21.0.2", used for testing
+"babel-loader": "^7.1.2", related to babel
+"babel-preset-es2015": "^6.24.1", presets for supported es version (choose one) <-- deprecated
+"babel-preset-es2017": "^6.24.1", presets for supported es version (choose one) <-- deprecated
+"babel-preset-preact": "^1.1.0", presets for preact, not sure if this should be used over ..
+"babel-preset-react": "^6.24.1", .. this one which is old preset for react
+"classnames": "^2.2.5", used to apply multiple classes to components
+"clean-webpack-plugin": "^0.1.17", cleans out folders before copying new files in during deploy
+"compression-webpack-plugin": "^1.0.1", used to gzip assets and files
+"copy-webpack-plugin": "^4.2.0", used to copy files over during deploy phase
+"css-loader": "^0.28.7", loads css
+"cssnano": "^3.10.0", compresses css and removes comments
+"extract-text-webpack-plugin": "^3.0.1", allows extracting css imports from js components
+"file-loader": "^1.1.5", used to be able to load files in webpack
+"if-env": "^1.0.0", used for testing
+"jest": "21.2.0", used for testing (why both?)
+"jest-css-modules": "^1.1.0", this solves a lot of issues with css modules not being recognised by jest
+"postcss": "^6.0.13", framework for loading css extensions in webpack
+"postcss-loader": "^2.0.8", is able to load css and scss
+"preact": "^8.2.6", the DOM manipulation library
+"preact-cli": "^1.4.1", preact for cli, used by jest
+"preact-compat": "^3.17.0", react compatibility library for preact
+"preact-render-spy": "1.1.0", collection of tools to facilitate jest testing
+"preact-router": "^2.5.7", routing framework
+"precss": "^2.0.0", this is a module for postcss for mixins and nesting support
+"style-loader": "^0.19.0", loads the styles
+"uglifyjs-webpack-plugin": "^1.0.0-beta.3", uglifies js
+"webpack": "^3.7.1" webpack is an advanced task runner
 
-- shallow rendering: only renders parent node and stubs all child nodes (depth: 1)
-- deep rendering: renders children up to n levels deep (depth: n)
-
-# to test function:
-
-it('lets you do cool things with preact components', () => {
-  const context = shallow(<Testable />);
-  expect(context.find('div').contains(<a>link</a>)).toBeTruthy();
-  context.find('[onClick]').simulate('click');
-  expect(context.find('a').text()).toBe('clicked');
-});
-
-# to test state:
-
-- const context = shallow(<ClickCounter />);
-- expect(context.state()).toEqual({ count: 0 });
-- context.find('[onClick]').simulate('click');
-- expect(context.state('count')).toEqual(1);
-
-# this seems good I will now integrate and test it
-
-wont work...
-
-and sghould preset be react or preact?
