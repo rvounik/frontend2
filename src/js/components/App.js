@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import Header from './Header/Header';
+import Header from './Header/js/Header';
 import Main from './Main';
 
 /* consider this the 'Master' application */

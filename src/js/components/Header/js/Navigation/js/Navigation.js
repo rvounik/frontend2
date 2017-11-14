@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import NavigationItem from './js/NavigationItem/NavigationItem';
-import css from './css/navigation.css';
+import NavigationItem from './NavigationItem/js/NavigationItem';
+import css from './../css/navigation.css';
 
 export default class Navigation extends Component {
     constructor() {

@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import Header from './../Header';
+import Header from '../Header';
 import { shallow, deep } from 'preact-render-spy';
 
 // todo: figure out if/why it is rendering child components instead of stubbing them

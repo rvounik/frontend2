@@ -8,9 +8,9 @@ import AsyncRoute from 'preact-async-route';
 function getTasks(url, cb, props){ return System.import('./Tasks/Tasks').then(module => module.default) }
 <AsyncRoute path="/tasks" getComponent={ getTasks } /> */
 
-import Inbox from './Inbox/Inbox'
-import Organisations from './Organisations/Organisations'
-import Tasks from './Tasks/Tasks'
+import Inbox from './Inbox/js/Inbox'
+import Organisations from './Organisations/js/Organisations'
+import Tasks from './Tasks/js/Tasks'
 
 export default class Main extends Component {
     constructor() {

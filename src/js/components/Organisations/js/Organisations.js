@@ -2,8 +2,8 @@ import { h, Component } from 'preact';
 import classNames from 'classnames';
 /** @jsx h */
 
-import Organisation from './js/Organisation/Organisation';
-import css from './css/organisations';
+import Organisation from './Organisation/js/Organisation';
+import css from './../css/organisations';
 
 export default class Organisations extends Component {
     constructor() {
