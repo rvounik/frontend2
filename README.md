@@ -7,8 +7,8 @@ Rebuild our current Frontend as a standalone SPA Javascript application with the
 Deployment
 - Webpack for task automation / bundling of files
 - NPM Scripts instead of Gulp / Grunt
-- Yarn instead of NPM (improved caching of dependencies)
-- JS and CSS code is bundled, uglified, minified and comments stripped
+- Yarn instead of NPM (faster and improved caching of dependencies)
+- JS and CSS code is bundled, uglified, minified and its comments stripped
 - Sourcemaps for JS and CSS
 
 HTML and CSS
@@ -17,7 +17,7 @@ HTML and CSS
 - Able to work offline (service-worker)
 - CSS modules (CSS locally scoped and imported by the JS component)
 - support for CSS, SCSS, SASS (import without extension)
-- PostCSS with NextCSS and Autoprefixer (and SASS support)
+- PostCSS with NextCSS, Autoprefixer, CSSNano (and most SASS-like features)
 - CSS Grid (replacing Bootstrap and Flexbox)
 - Aria support
 
@@ -34,7 +34,7 @@ Performance
 
 Integration
 - Communicates (using Fetch, instead of Ajax) with *Sexy Field* endpoints
-- Replaces current frontend (and, if possible, *Styleguide*)
+- Replaces current *Frontend* (and, if possible, *Styleguide*)
 - Has a way to implement access rights (roles) and translations
 
 # Quick start
@@ -62,7 +62,7 @@ Docker support will follow later.
 - add example CSS Grid implementation
 - add redux (and thunk, if needed)
 - figure out how application can load/show only the components the user has access to
-- figure out how not to load everything at once but lazy load the components that werent needed initially
+- figure out how not to load everything at once but lazy load the components that werent needed initially (prpl pattern)
 - implement neon frontend (static content)
 - refactor bootstrap to CSS Grid and remove the dependency
 - replace command flow with API calls using fetch (with proper error handling)
@@ -93,10 +93,9 @@ You can mock the CSS by using identity-obj-proxy
     }
   }
 
-I have for now removed this from dependencies
+I have for now removed this from dependencies. see https://facebook.github.io/jest/docs/en/webpack.html
 
 # dependencies
-
 "@types/node": "^8.0.34" node descriptions
 "autoprefixer": "^7.1.5", automaticaly inserts css vendor prefixes
 "babel-core": "^6.26.0", core files of babel used to transpile es2015 to es5
@@ -128,4 +127,3 @@ I have for now removed this from dependencies
 "style-loader": "^0.19.0", loads the styles
 "uglifyjs-webpack-plugin": "^1.0.0-beta.3", uglifies js
 "webpack": "^3.7.1" webpack is an advanced task runner
-

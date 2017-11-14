@@ -1,4 +1,4 @@
-contains utils that can be imported by the components ie:
+contains utils that can be imported by the components like so:
 
 import formatDate from '../../../../utils/formatDate';
 import getAtPath from '../../../../utils/getAtPath';
