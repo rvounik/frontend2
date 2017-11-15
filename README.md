@@ -66,7 +66,6 @@ deploy: (build, lint, test)
 
 # Todo
 
-- refactor es presets thingie since its deprecated
 - add redux (and thunk, if needed)
 - add example CSS Grid implementation
 - add aria support for visually impaired
@@ -133,8 +132,8 @@ and its configuration option from package.json:
 - "babel-eslint":                 used babel parser for linting
 - "babel-jest":                   used by the transformPreprocessor that converts JSX before running tests
 - "babel-loader":                 loads js during webpacks process
-- "babel-preset-env":             allows transpiling es2015+ code to specified browser version (or default, which is es5) *
-- "babel-preset-preact":          allows handling of JSX during transpiling *
+- "babel-preset-env":             allows transpiling es2015+ code to specified browser version (or default, which is es5)
+- "babel-preset-preact":          allows handling of JSX during transpiling
 - "classnames":                   used to apply multiple classes to components
 - "clean-webpack-plugin":         cleans out folders before copying new files in during deploy
 - "compression-webpack-plugin":   used to gzip assets and files
@@ -162,8 +161,6 @@ and its configuration option from package.json:
 - "uglifyjs-webpack-plugin":      uglifies, minifies javascript
 - "webpack":                      webpack is an advanced task runner
 
-* currently it is unclear to me whether the separately loaded babel-polyfill is still required
-
 # Development
 
 - pages should be defined under src/js/pages, imported by App.js and added to the router component there
@@ -171,18 +168,15 @@ and its configuration option from package.json:
 - pages can include generic components from src/js/components
 - following the master/slave pattern, redux logic should only be contained in the master component of a page
 
-
 - components should be defined within the page/ folder unless they are generic enough to be placed under src/js/components
 - components can include functionality from src/js/utils (import formatDate from '../../../../utils/formatDate';)
 - components import their own css/scss/sass declarations from the style/ folder (you do not need to specify the extension)
 - components should contain functional tests that are stored under the test/ folder
 
-
 - stylesheets are closely coupled to the JS component (CSS modules)
 - any custom selector defined in your CSS will be given a unique name during build and assigned to the importing JS component
 - global cSS (src/style/common.scss) is not transformed like this and can be used for typography, colours, layout etc.
 - SCSS stylesheets may include other stylesheets using plain @import statements
-
 
 - note: inside src/js/utils there is a global js file that is loaded first and contains startup code (typekit, service-worker etc)
 - note: yarn should be used in favour of npm

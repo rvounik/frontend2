@@ -33,13 +33,10 @@
 
 <noscript>This application requires Javascript to function properly. Please enable this in your web browser.</noscript>
 
-<!-- first load up the common.js for things like typekit, service-workers etc -->
+<!-- first load the common.js for things like typekit, service-workers etc -->
 <script src="web/js/common.js"></script>
 
-<!-- Babel can’t support all of ES6 with compilation alone — it also requires some runtime support using a polyfill -->
-<!--<script src="web/js/polyfill.js"></script>-->
-
-<!-- last, load the bundled, es5-transpiled app code -->
+<!-- then load the bundled, es5-transpiled app code -->
 <script src="web/js/app.js"></script>
 
 </body>
