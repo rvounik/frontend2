@@ -19,7 +19,7 @@ export default class Header extends Component {
 
         return (
             <header className={ style.header }>
-                <figure className="logo"></figure>
+                <figure className="logo" />
                 <Navigation items={ items } />
             </header>
         )

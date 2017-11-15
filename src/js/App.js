@@ -1,9 +1,9 @@
-import { h, Component, render } from 'preact';
+import { h, render } from 'preact';
 import Router from 'preact-router';
 /** @jsx h */
 
 // general CSS rules are loaded here (keep this above the JS imports since this CSS needs to be on top)
-import css from './../style/common.scss';
+import style from './../style/common.scss';
 
 import Header from './components/Header/Header';
 
@@ -14,9 +14,9 @@ import Header from './components/Header/Header';
 // function getTasks(url, cb, props){ return System.import('./Tasks/Tasks').then(module => module.default) }
 // <AsyncRoute path="/tasks" getComponent={ getTasks } /> */
 
-import Inbox from './pages/Inbox/Inbox'
-import Organisations from './pages/Organisations/Organisations'
-import Tasks from './pages/Tasks/Tasks'
+import Inbox from './pages/Inbox/Inbox';
+import Organisations from './pages/Organisations/Organisations';
+import Tasks from './pages/Tasks/Tasks';
 
 render(
     <section>

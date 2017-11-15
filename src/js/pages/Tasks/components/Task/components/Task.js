@@ -6,7 +6,7 @@ export default class Task extends Component {
         super();
     }
 
-    apiEndpointRequest(url, request) {
+    apiEndpointRequest(url) {
         fetch(url).then(response => {
             if (response.ok) {
                 // console.log('retrieved uuid: '+response.json().uuid); // synchronous. will not work. (that is why we needed thunk!)

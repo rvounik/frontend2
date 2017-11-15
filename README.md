@@ -1,7 +1,7 @@
 
 # Description
 
-Rebuild our current Frontend as a standalone SPA Javascript application with the following specs:
+Rebuild our current *Frontend* as a standalone Javascript SPA with the following specs:
 
 # Features
 
@@ -66,21 +66,19 @@ add dependencies:
 
 # Todo
 
-- finish css module set up: find out how to exclude the common.scss definitions from selector name transformation so
-  they are applied to each JS component and thus can contain generic css
-- implement JS and CSS linting
-- move repository to githost
-- add example CSS Grid implementation
+- refactor es presets thingie since its deprecated
 - add redux (and thunk, if needed)
-- figure out how application can load/show only the components the user has access to
+- add example CSS Grid implementation
+- add aria support for visually impaired
 - figure out how not to load everything at once but lazy load the components that werent needed initially (prpl pattern)
+- figure out how application can load/show only the components the user has access to
+- add Dockerfile so a docker image can be built and frontend can run as a docker container
+- move repository to githost
+- figure out where the translations are loaded from
+- decide what to do with styleguide (may I recommend merging into frontend?)
 - implement neon frontend (static content)
 - refactor bootstrap to CSS Grid and remove the dependency
 - replace command flow with API calls using fetch (with proper error handling)
-- add aria support for visually impaired
-- decide what to do with styleguide (may I recommend merging into frontend?)
-- figure out where the translations are loaded from
-- add Dockerfile so a docker image can be built and frontend can run as a docker container
 
 # About tests
 
@@ -132,6 +130,7 @@ and its configuration option from package.json:
 - "@types/node":                  enable code completion (in your IDE) and make compilation possible
 - "autoprefixer":                 automatically inserts CSS vendor prefixes
 - "babel-core":                   core files of babel used to transpile es2015 to es5
+- "babel-eslint":                 used babel parser for linting
 - "babel-jest":                   used by the transformPreprocessor that converts JSX before running tests
 - "babel-loader":                 related to babel
 - "babel-preset-es2015":,         presets for supported es version (choose one) <-- deprecated
@@ -144,6 +143,9 @@ and its configuration option from package.json:
 - "copy-webpack-plugin":          used to copy files over during deploy phase
 - "css-loader":                   loads css
 - "cssnano":                      compresses css and removes comments
+- "eslint":                       javascript linter
+- "eslint-plugin-jest":           contains linting support for jest
+- "eslint-plugin-react":          contains linting support for react
 - "extract-text-webpack-plugin":  allows extracting css imports from js components
 - "file-loader":                  used to be able to load files in webpack
 - "if-env":                       used for testing
@@ -158,6 +160,7 @@ and its configuration option from package.json:
 - "preact-router":                routing framework
 - "precss":                       this is a module for postcss for mixins and nesting support
 - "style-loader":                 loads the styles
+- "stylelint":                    checks for css lint
 - "uglifyjs-webpack-plugin":      uglifies js
 - "webpack":                      webpack is an advanced task runner
 
