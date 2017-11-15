@@ -1,19 +1,37 @@
-import { h } from 'preact';
 import Header from './../Header';
 import { shallow, deep } from 'preact-render-spy';
 
-// todo: figure out if/why it is rendering child components instead of stubbing them
-
-// todo: use these examples for writing the first tests:
-// https://github.com/mzgoddard/preact-render-spy/blob/557e9f00402cdee5378230bf7f5f9723ec1ddba1/src/shared-render.test.js
-// https://github.com/mzgoddard/preact-render-spy
-// https://github.com/mzgoddard/preact-render-spy/blob/master/src/shallow-render.test.js
-// https://github.com/mzgoddard/preact-render-spy/blob/master/src/deep-render.test.js
-// https://github.com/mzgoddard/preact-render-spy/blob/master/src/shared-render.test.js
+// test examples: https://github.com/mzgoddard/preact-render-spy/blob/master/src/shared-render.test.js
 
 test('check if Header is rendering empty figure with class \'logo\'', () => {
     const context = shallow(<Header/>);
+    context.setState({ items: {label: 'inbox', link: '/'}});
 
     expect(context.find('figure').text()).toBe('');
-    expect(context.find('figure').attr('className')).toBe('logo');
+    expect(context.find('figure').attr('className')).toBe('logo'); // do not use 'class' here
+});
+
+test('check if Navigation items are populated', () => {
+    const context = shallow(<Header/>);
+
+    expect(context.find('Navigation').attr('items')).toEqual([
+        {"label": "inbox", "link": "/"},
+        {"label": "organisations", "link": "/organisations"},
+        {"label": "tasks", "link": "/tasks"}
+    ]);
+});
+
+test('use \'deep\' instead of \'shallow\' to test child component (in which you\'d normally write these tests)', () => {
+    const context = deep(<Header/>);
+
+    expect(context.find('a').length).toBe(3);
+    expect(context.find('li').contains(<a href="/">inbox</a>)).toBeTruthy();
+});
+
+test('check for link validity', () => {
+    const context = deep(<Header/>);
+    const child = (context.find('a').at(2));
+
+    expect(child.attr('href')).toBe('/tasks');
+    child.simulate('click'); // dont test if link is being followed. instead test state or className change
 });

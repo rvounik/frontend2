@@ -12,8 +12,8 @@ export default class Header extends Component {
     render() {
         // assume this list of nodes is provided by the authentication service
         let items = [
-            { label: 'inbox', link: '/'} ,
-            { label: 'organisations', link: '/organisations'} ,
+            { label: 'inbox', link: '/'},
+            { label: 'organisations', link: '/organisations'},
             { label: 'tasks', link:'/tasks' }
         ];
 

@@ -68,6 +68,7 @@
     },
     "scripts": {
         "build": "webpack",
+        "deploy": "yarn run webpack && yarn run jest --no-cache",
         "test": "jest --no-cache"
     }
 }
