@@ -108,16 +108,13 @@ see https://facebook.github.io/jest/docs/en/webpack.html
 you can also mock localStorage, which wont be needed for our *Frontend* any time soon, so have removed browserMocks.js:
 
 `const localStorageMock = (function() {
-    let store = {};
-
+let store = {};
     return {
         getItem: (key) => store[key] || null,
         setItem: (key, value) => store[key] = value.toString(),
         clear: () => store = {}
     };
-
 })();
-
 Object.defineProperty(window, 'localStorage', {
     value: localStorageMock
 });`
@@ -132,7 +129,7 @@ and its configuration option from package.json:
 
 # Justification for included dependencies
 
-"@types/node": "^8.0.34"                    enable code completion (in your IDE) and make compilation possible
+`"@types/node": "^8.0.34"                    enable code completion (in your IDE) and make compilation possible
 "autoprefixer": "^7.1.5",                   automatically inserts CSS vendor prefixes
 "babel-core": "^6.26.0",                    core files of babel used to transpile es2015 to es5
 "babel-jest": "^21.2.0",                    used by the transformPreprocessor that converts JSX before running tests
@@ -162,4 +159,4 @@ and its configuration option from package.json:
 "precss": "^2.0.0",                         this is a module for postcss for mixins and nesting support
 "style-loader": "^0.19.0",                  loads the styles
 "uglifyjs-webpack-plugin": "^1.0.0-beta.3", uglifies js
-"webpack": "^3.7.1"                         webpack is an advanced task runner
+"webpack": "^3.7.1"                         webpack is an advanced task runner`
