@@ -84,23 +84,20 @@ add dependencies:
 
 # About tests
 
-In the Frontend we should mostly be concerned with Functional Tests (also called Integration Tests). This is because
-the Frontend is aimed at the end user and as such it should be tested from the end user perspective. For the end user
-it does not matter much how something works, it is more important to know that it works. This is different from Unit
-Testing in other parts of the application that do not face the end user. You want to know that, when a certain button
-is clicked, a certain value in some other part of the application is changed. So this covers integration, interaction
-and functionality. It should also be possible to test state mutations, since we use (p)react a lot.
+In the Frontend we should mostly be concerned with Functional Tests (also known as Integration Tests) written from the
+end user perspective, covering as much as possible from functionality, interaction and integration. As an example, when
+a button is clicked, does the state update? Or does the panel appear? Or, is the navigation bar populated initially?
 
-# mocking statis assets and stylesheets
+# Mocking static assets and stylesheets
 
 You can mock the CSS and other filetypes by using fileMocks and identity-obj-proxy
 
-"jest": {
+`"jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "identity-obj-proxy"
+          "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+          "\\.(css|less)$": "identity-obj-proxy"
     }
-  }
+}`
 
 I have for now removed CSS mocking since we are going to test against it. 
 
@@ -135,9 +132,10 @@ and its configuration option from package.json:
 
 # Justification for included dependencies
 
-"@types/node": "^8.0.34"                    enable code completion and make compilation possible (make your IDE understand Node)
+"@types/node": "^8.0.34"                    enable code completion (in your IDE) and make compilation possible
 "autoprefixer": "^7.1.5",                   automatically inserts CSS vendor prefixes
 "babel-core": "^6.26.0",                    core files of babel used to transpile es2015 to es5
+"babel-jest": "^21.2.0",                    used by the transformPreprocessor that converts JSX before running tests
 "babel-loader": "^7.1.2",                   related to babel
 "babel-preset-es2015": "^6.24.1",           presets for supported es version (choose one) <-- deprecated
 "babel-preset-es2017": "^6.24.1",           presets for supported es version (choose one) <-- deprecated
