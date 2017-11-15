@@ -129,34 +129,34 @@ and its configuration option from package.json:
 
 # Justification for included dependencies
 
-`"@types/node": "^8.0.34"                    enable code completion (in your IDE) and make compilation possible
-"autoprefixer": "^7.1.5",                   automatically inserts CSS vendor prefixes
-"babel-core": "^6.26.0",                    core files of babel used to transpile es2015 to es5
-"babel-jest": "^21.2.0",                    used by the transformPreprocessor that converts JSX before running tests
-"babel-loader": "^7.1.2",                   related to babel
-"babel-preset-es2015": "^6.24.1",           presets for supported es version (choose one) <-- deprecated
-"babel-preset-es2017": "^6.24.1",           presets for supported es version (choose one) <-- deprecated
-"babel-preset-preact": "^1.1.0",            presets for preact, not sure if this should be used over ..
-"babel-preset-react": "^6.24.1",            .. this one which is old preset for react
-"classnames": "^2.2.5",                     used to apply multiple classes to components
-"clean-webpack-plugin": "^0.1.17",          cleans out folders before copying new files in during deploy
-"compression-webpack-plugin": "^1.0.1",     used to gzip assets and files
-"copy-webpack-plugin": "^4.2.0",            used to copy files over during deploy phase
-"css-loader": "^0.28.7",                    loads css
-"cssnano": "^3.10.0",                       compresses css and removes comments
-"extract-text-webpack-plugin": "^3.0.1",    allows extracting css imports from js components
-"file-loader": "^1.1.5",                    used to be able to load files in webpack
-"if-env": "^1.0.0",                         used for testing
-"jest": "21.2.0",                           used to run test from commandline
-"jest-css-modules": "^1.1.0",               this solves a lot of issues with css modules not being recognised by jest
-"postcss": "^6.0.13",                       framework for loading css extensions in webpack
-"postcss-loader": "^2.0.8",                 is able to load css and scss
-"preact": "^8.2.6",                         the DOM manipulation library
-"preact-cli": "^1.4.1",                     preact for cli, used by jest
-"preact-compat": "^3.17.0",                 react compatibility library for preact
-"preact-render-spy": "1.1.0",               collection of tools to facilitate jest testing
-"preact-router": "^2.5.7",                  routing framework
-"precss": "^2.0.0",                         this is a module for postcss for mixins and nesting support
-"style-loader": "^0.19.0",                  loads the styles
-"uglifyjs-webpack-plugin": "^1.0.0-beta.3", uglifies js
-"webpack": "^3.7.1"                         webpack is an advanced task runner`
+- "@types/node":                  enable code completion (in your IDE) and make compilation possible
+- "autoprefixer":                 automatically inserts CSS vendor prefixes
+- "babel-core":                   core files of babel used to transpile es2015 to es5
+- "babel-jest":                   used by the transformPreprocessor that converts JSX before running tests
+- "babel-loader":                 related to babel
+- "babel-preset-es2015":,         presets for supported es version (choose one) <-- deprecated
+- "babel-preset-es2017":          presets for supported es version (choose one) <-- deprecated
+- "babel-preset-preact":          presets for preact, not sure if this should be used over ..
+- "babel-preset-react":           .. this one which is old preset for react
+- "classnames":                   used to apply multiple classes to components
+- "clean-webpack-plugin":         cleans out folders before copying new files in during deploy
+- "compression-webpack-plugin":   used to gzip assets and files
+- "copy-webpack-plugin":          used to copy files over during deploy phase
+- "css-loader":                   loads css
+- "cssnano":                      compresses css and removes comments
+- "extract-text-webpack-plugin":  allows extracting css imports from js components
+- "file-loader":                  used to be able to load files in webpack
+- "if-env":                       used for testing
+- "jest":                         used to run test from commandline
+- "jest-css-modules":             this solves a lot of issues with css modules not being recognised by jest
+- "postcss":                      framework for loading css extensions in webpack
+- "postcss-loader":               is able to load css and scss
+- "preact":                       the DOM manipulation library
+- "preact-cli":                   preact for cli, used by jest
+- "preact-compat":                react compatibility library for preact
+- "preact-render-spy":            collection of tools to facilitate jest testing
+- "preact-router":                routing framework
+- "precss":                       this is a module for postcss for mixins and nesting support
+- "style-loader":                 loads the styles
+- "uglifyjs-webpack-plugin":      uglifies js
+- "webpack":                      webpack is an advanced task runner
