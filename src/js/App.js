@@ -1,3 +1,6 @@
+// still unclear if and where this polyfill is required, but this seems to be the most common approach
+import 'babel-polyfill';
+
 import { h, render } from 'preact';
 import Router from 'preact-router';
 /** @jsx h */

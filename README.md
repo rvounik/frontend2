@@ -13,7 +13,7 @@ Deployment
 - Sourcemaps for JS and CSS
 
 HTML and CSS
-- Behaves like a Progressive Web Application (manifest.json)
+- Behaves like a Progressive Web Application (following manifest)
 - Fully HTML5, CSS3 compliant
 - Able to work offline (service-worker)
 - CSS modules (CSS locally scoped and imported by the JS component)
@@ -30,7 +30,7 @@ Javascript
 - Fully component based (master-slave pattern)
 
 Performance
-- Very fast delivery using Gzipped assets and lazy loading
+- Much faster delivery using Gzipped assets and lazy loading
 - Much faster building of assets (and no more syncing issues?)
 
 Integration
@@ -43,6 +43,10 @@ Integration
 install dependencies:
 
 `yarn install`
+
+add dependency:
+
+`yarn add <package> --dev`
 
 build:
 
@@ -59,10 +63,6 @@ run linters:
 deploy: (build, lint, test)
 
 `yarn run deploy`
-
-add dependencies:
-
-`yarn add <package> --dev`
 
 # Todo
 
@@ -103,7 +103,7 @@ see https://facebook.github.io/jest/docs/en/webpack.html
 
 # Mocking localStorage
 
-you can also mock localStorage, which wont be needed for our *Frontend* any time soon, so have removed browserMocks.js:
+you can also mock localStorage, which wont be needed for our *Frontend* any time soon, so I have removed browserMocks.js:
 
 `const localStorageMock = (function() {
 let store = {};
@@ -132,23 +132,21 @@ and its configuration option from package.json:
 - "babel-core":                   core files of babel used to transpile es2015 to es5
 - "babel-eslint":                 used babel parser for linting
 - "babel-jest":                   used by the transformPreprocessor that converts JSX before running tests
-- "babel-loader":                 related to babel
-- "babel-preset-es2015":,         presets for supported es version (choose one) <-- deprecated
-- "babel-preset-es2017":          presets for supported es version (choose one) <-- deprecated
-- "babel-preset-preact":          presets for preact, not sure if this should be used over ..
-- "babel-preset-react":           .. this one which is old preset for react
+- "babel-loader":                 loads js during webpacks process
+- "babel-preset-env":             allows transpiling es2015+ code to specified browser version (or default, which is es5) *
+- "babel-preset-preact":          allows handling of JSX during transpiling *
 - "classnames":                   used to apply multiple classes to components
 - "clean-webpack-plugin":         cleans out folders before copying new files in during deploy
 - "compression-webpack-plugin":   used to gzip assets and files
 - "copy-webpack-plugin":          used to copy files over during deploy phase
 - "css-loader":                   loads css
 - "cssnano":                      compresses css and removes comments
-- "eslint":                       javascript linter
+- "eslint":                       checks for javascript lint (CLI version)
 - "eslint-plugin-jest":           contains linting support for jest
 - "eslint-plugin-react":          contains linting support for react
 - "extract-text-webpack-plugin":  allows extracting css imports from js components
 - "file-loader":                  used to be able to load files in webpack
-- "if-env":                       used for testing
+- "if-env":                       can be used to switch functionality per environment
 - "jest":                         used to run test from commandline
 - "jest-css-modules":             this solves a lot of issues with css modules not being recognised by jest
 - "postcss":                      framework for loading css extensions in webpack
@@ -160,9 +158,11 @@ and its configuration option from package.json:
 - "preact-router":                routing framework
 - "precss":                       this is a module for postcss for mixins and nesting support
 - "style-loader":                 loads the styles
-- "stylelint":                    checks for css lint
-- "uglifyjs-webpack-plugin":      uglifies js
+- "stylelint":                    checks for css lint (CLI version)
+- "uglifyjs-webpack-plugin":      uglifies, minifies javascript
 - "webpack":                      webpack is an advanced task runner
+
+* currently it is unclear to me whether the separately loaded babel-polyfill is still required
 
 # Development
 
@@ -171,16 +171,19 @@ and its configuration option from package.json:
 - pages can include generic components from src/js/components
 - following the master/slave pattern, redux logic should only be contained in the master component of a page
 
+
 - components should be defined within the page/ folder unless they are generic enough to be placed under src/js/components
 - components can include functionality from src/js/utils (import formatDate from '../../../../utils/formatDate';)
 - components import their own css/scss/sass declarations from the style/ folder (you do not need to specify the extension)
 - components should contain functional tests that are stored under the test/ folder
 
-- stylesheets are closely tied to the JS component (css modules)
-- any custom selector defined in your css will be given a unique name during build and assigned to the JS component
-- global css (src/style/common.scss) is not transformed like this and can be used for typography, colours, layout etc
-- scss stylesheets may include other stylesheets using @import statements
 
-- note inside src/js/utils there is a global js file that is loaded first and contains startup code (typekit, service-worker etc)
-- note yarn should be used in favour of npm
-- note in the webpack.config there are extra configuration flags for compressing assets and enabling sourcemaps
+- stylesheets are closely coupled to the JS component (CSS modules)
+- any custom selector defined in your CSS will be given a unique name during build and assigned to the importing JS component
+- global cSS (src/style/common.scss) is not transformed like this and can be used for typography, colours, layout etc.
+- SCSS stylesheets may include other stylesheets using plain @import statements
+
+
+- note: inside src/js/utils there is a global js file that is loaded first and contains startup code (typekit, service-worker etc)
+- note: yarn should be used in favour of npm
+- note: in the webpack.config there are extra configuration flags for compressing assets and enabling sourcemaps

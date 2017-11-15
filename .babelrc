@@ -1,5 +1,19 @@
 {
-    "presets":[
-        "es2015", "preact"
+    "presets": [
+        [
+            "env",
+            {
+                "modules": "commonjs",
+                "useBuiltIns": true,
+                "targets": {
+                    "browsers": [
+                        "last 2 Chrome versions"
+                    ]
+                }
+            }
+        ],
+        [
+            "preact"
+        ]
     ]
 }

@@ -37,8 +37,7 @@ module.exports = {
     entry: {
         // each entry point defined here is scanned for imported files, that are matched against rules defined below
         app: './src/js/App.js',
-        common: './src/js/utils/common.js',
-        polyfill: './node_modules/babel-polyfill/dist/polyfill.min.js',
+        common: './src/js/utils/common.js'
     },
     output: {
         // here you configure where (and how) the bundled files will be stored
@@ -55,9 +54,6 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react'] // todo: deprecated. refactor.
-                }
             },
             {
                 // process all SCSS/SASS/CSS file imported in the JS extracted by the above rule, excluding common.scss
