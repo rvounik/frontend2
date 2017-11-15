@@ -160,3 +160,24 @@ and its configuration option from package.json:
 - "style-loader":                 loads the styles
 - "uglifyjs-webpack-plugin":      uglifies js
 - "webpack":                      webpack is an advanced task runner
+
+# Development
+
+- pages should be defined under src/js/pages, imported by App.js and added to the router component there
+- pages can consist of custom, specific components, that live inside the page' components folder
+- pages can include generic components from src/js/components
+- following the master/slave pattern, redux logic should only be contained in the master component of a page
+
+- components should be defined within the page/ folder unless they are generic enough to be placed under src/js/components
+- components can include functionality from src/js/utils (import formatDate from '../../../../utils/formatDate';)
+- components import their own css/scss/sass declarations from the style/ folder (you do not need to specify the extension)
+- components should contain functional tests that are stored under the test/ folder
+
+- stylesheets are closely tied to the JS component (css modules)
+- any custom selector defined in your css will be given a unique name during build and assigned to the JS component
+- global css (src/style/common.scss) is not transformed like this and can be used for typography, colours, layout etc
+- scss stylesheets may include other stylesheets using @import statements
+
+- note inside src/js/utils there is a global js file that is loaded first and contains startup code (typekit, service-worker etc)
+- note yarn should be used in favour of npm
+- note in the webpack.config there are extra configuration flags for compressing assets and enabling sourcemaps

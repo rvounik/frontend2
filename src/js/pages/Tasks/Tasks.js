@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 /** @jsx h */
 
 import Task from './components/Task/components/Task';
-import css from './style/tasks';
+import style from './style/tasks';
 
 export default class Tasks extends Component {
     constructor() {
@@ -11,7 +11,7 @@ export default class Tasks extends Component {
 
     render() {
         return (
-            <section className={ css.tasks }>
+            <section className={ style.tasks }>
                 <section>
                     <Task />
                 </section>

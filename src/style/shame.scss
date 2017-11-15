@@ -1,3 +1,5 @@
-li {
-    background: yellow !important;
+/* for all your hacky code that should be fixed at some point. you have to use !important since its loaded first */
+
+* {
+    font-family: "American Typewriter" !important;
 }

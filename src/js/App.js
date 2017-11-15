@@ -3,7 +3,7 @@ import Router from 'preact-router';
 /** @jsx h */
 
 // general CSS rules are loaded here (keep this above the JS imports since this CSS needs to be on top)
-import css from './../style/common';
+import css from './../style/common.scss';
 
 import Header from './components/Header/Header';
 

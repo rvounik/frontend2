@@ -1,7 +1,9 @@
 import { h, Component } from 'preact';
+import classNames from 'classnames';
+
 /** @jsx h */
 
-import css from './style/inbox';
+import style from './style/inbox';
 
 export default class Inbox extends Component {
     constructor() {
@@ -10,7 +12,7 @@ export default class Inbox extends Component {
 
     render() {
         return (
-            <section className={ css.inbox }>
+            <section className={ classNames('clear', style.inbox) }>
                 <section>
                     <p>
                         Inbox content: the starting page (app?) in neon

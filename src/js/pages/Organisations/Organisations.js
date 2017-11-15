@@ -3,7 +3,7 @@ import classNames from 'classnames';
 /** @jsx h */
 
 import Organisation from './components/Organisation/components/Organisation';
-import css from './style/organisations';
+import style from './style/organisations';
 
 export default class Organisations extends Component {
     constructor() {
@@ -12,7 +12,7 @@ export default class Organisations extends Component {
 
     render() {
         return (
-            <section className={ classNames('clear', css.organisations) } >
+            <section className={ classNames('clear', style.organisations) } >
                 <section>
                     <Organisation label={ 'label' } />
                 </section>

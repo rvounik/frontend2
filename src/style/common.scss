@@ -1,17 +1,13 @@
 /* in here only general css should be placed that is not tied to a component. the rest is inside the components */
 
-/* todo: make this an index file and import every common css in here (typography, colours, shame etc) */
-/* todo: but more important, figure out a way to exclude this from the css modules transformation */
-/* todo: also figure out how to strip out single line comments */
+/* load base css definitions */
+@import './base/helpers.scss';
+/* @import 'base/forms'; */
+/* @import 'base/layout'; */
+/* @import 'base/modals'; */
 
-/* note that shame.scss will be first in the generated css, not last as it used to be. so, use !important to override. */
-@import 'shame.scss';
+/* load css specific to style vendor libraries */
+/* @import 'vendor/parsley'; */
 
-* {
-    margin: 0;
-}
-
-/* wont work. selector name will be transformed */
-.clear {
-    clear: both;
-}
+/* load shame css for all your hacky code that should be fixed at some point */
+@import './shame.scss';
