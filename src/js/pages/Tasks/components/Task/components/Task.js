@@ -2,10 +2,11 @@ import { h, Component } from 'preact';
 /** @jsx h */
 
 export default class Task extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
+    // todo: move to container component
     apiEndpointRequest(url) {
         fetch(url).then(response => {
             if (response.ok) {
@@ -39,8 +40,11 @@ export default class Task extends Component {
 
 
     render() {
+        console.log('retrieved state through props for active: '+this.props.active);
+
         return (
             <section>
+                <span>this is a test: <a href="#" onClick={ () => console.log(this.props.fetchSomething()) }>click here</a></span>
                 <p>
                     You can add projects here: <button onClick={ () => this.apiEndpointRequest('https://httpbin.org/uuid') } type="button">Add project</button>
                     <br/><br/>

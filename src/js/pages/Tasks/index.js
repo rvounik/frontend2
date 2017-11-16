@@ -12,7 +12,7 @@ import { createStore } from 'redux'
 import someReducer from './reducers/someReducer.js'
 
 // import the App component, which is the container component for this page (in old frontend: containers/App.js)
-import App from './components/App'
+import Tasks from './components/Tasks'
 
 // render everything (inside the frontend App.js)
 export default class Index extends Component {
@@ -22,7 +22,7 @@ export default class Index extends Component {
 
         return (
             <Provider store={ store }>
-                <App />
+                <Tasks />
             </Provider>
         )
     }
