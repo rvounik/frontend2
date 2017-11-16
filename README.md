@@ -166,7 +166,14 @@ and its configuration option from package.json:
 - pages should be defined under src/js/pages, imported by App.js and added to the router component there
 - pages can consist of custom, specific components, that live inside the page' components folder
 - pages can include generic components from src/js/components
-- following the master/slave pattern, redux logic should only be contained in the master component of a page
+- following the master/slave or presentational/container or smart/dumb pattern, redux logic should only be contained in
+  the master component of a page. see https://redux.js.org/docs/basics/UsageWithReact.html for more information
+no, not really..
+
+a container component is just a React component that uses store.subscribe() to read a part of the Redux state tree and
+supply props to a presentational component it renders.
+
+
 
 - components should be defined within the page/ folder unless they are generic enough to be placed under src/js/components
 - components can include functionality from src/js/utils (import formatDate from '../../../../utils/formatDate';)

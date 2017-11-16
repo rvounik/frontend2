@@ -19,7 +19,7 @@ import Header from './components/Header/Header';
 
 import Inbox from './pages/Inbox/Inbox';
 import Organisations from './pages/Organisations/Organisations';
-import Tasks from './pages/Tasks/Tasks';
+import Tasks from './pages/Tasks';
 
 render(
     <section>

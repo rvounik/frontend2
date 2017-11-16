@@ -4,6 +4,8 @@ import { h, Component } from 'preact';
 import Navigation from './components/Navigation/js/Navigation';
 import style from './style/header';
 
+// todo: remove all references to redux from this Header COMPONENT. a component has no redux logic. fool!
+
 export default class Header extends Component {
     constructor() {
         super();
