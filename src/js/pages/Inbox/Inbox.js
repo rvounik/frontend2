@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import classNames from 'classnames';
 
 /** @jsx h */
-
 import style from './style/inbox';
 
 export default class Inbox extends Component {

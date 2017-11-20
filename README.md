@@ -66,7 +66,6 @@ deploy: (build, lint, test)
 
 # Todo
 
-- add redux (and thunk, if needed)
 - add example CSS Grid implementation
 - add aria support for visually impaired
 - figure out how not to load everything at once but lazy load the components that werent needed initially (prpl pattern)
@@ -84,6 +83,8 @@ deploy: (build, lint, test)
 In the Frontend we should mostly be concerned with Functional Tests (also known as Integration Tests) written from the
 end user perspective, covering as much as possible from functionality, interaction and integration. As an example, when
 a button is clicked, does the state update? Or does the panel appear? Or, is the navigation bar populated initially?
+
+All Javascript omponents should contain functional tests that are stored under the test/ folder.
 
 # Mocking static assets and stylesheets
 
@@ -163,28 +164,40 @@ and its configuration option from package.json:
 
 # Development
 
-- pages should be defined under src/js/pages, imported by App.js and added to the router component there
-- pages can consist of custom, specific components, that live inside the page' components folder
-- pages can include generic components from src/js/components
-- following the master/slave or presentational/container or smart/dumb pattern, redux logic should only be contained in
-  the master component of a page. see https://redux.js.org/docs/basics/UsageWithReact.html for more information
-no, not really..
+__Javascript__
 
-a container component is just a React component that uses store.subscribe() to read a part of the Redux state tree and
-supply props to a presentational component it renders.
+The Javascript code is structured in 3 basic concepts following best practices from React and Redux:
 
+1) Root component: *src/js/App.js*
 
+The root component combines reducers, sets up the Redux store and ties routing components together. There should only be
+one root component, unless specific applications need to be set up. For example, one just for filling in a
+questionnaire. Also, this is the only place where reducers should be loaded, combined and passed on to the store.
 
-- components should be defined within the page/ folder unless they are generic enough to be placed under src/js/components
-- components can include functionality from src/js/utils (import formatDate from '../../../../utils/formatDate';)
-- components import their own css/scss/sass declarations from the style/ folder (you do not need to specify the extension)
-- components should contain functional tests that are stored under the test/ folder
+2) Container component: *src/js/pages/Tasks/index.js*
 
-- stylesheets are closely coupled to the JS component (CSS modules)
-- any custom selector defined in your CSS will be given a unique name during build and assigned to the importing JS component
-- global cSS (src/style/common.scss) is not transformed like this and can be used for typography, colours, layout etc.
-- SCSS stylesheets may include other stylesheets using plain @import statements
+The container component defines actions, initial data, mapStateToProps, dispatchers. In our previous situation this was
+stored in*containers/App.js* but wasnt really concerned with what it should be concerned with: just the data. What does
+the initial data look like, how is new data retrieved, how is data stored. It ensures this data is then passed on to a
+presentational component. Container components should be placed underneath 'pages', since each page in the application
+usually requires its own container- and child components and logic. Also, it should be called index.js to avoid
+confusion with presentational components and ease importing.
 
-- note: inside src/js/utils there is a global js file that is loaded first and contains startup code (typekit, service-worker etc)
-- note: yarn should be used in favour of npm
-- note: in the webpack.config there are extra configuration flags for compressing assets and enabling sourcemaps
+3) Presentational component: *src/js/Tasks/js/Tasks.js*
+
+The presentational component is concerned with the actual layout. has its own css, and its own component methods. This
+is where you would store child components and methods that deal with presentation (ie tabs, modals, panels, sorting).
+Keep in mind that it is allowed to import generic components from the *src/js/components* folder if required. Likewise it
+is possible to import generic methods from the *src/js/utils* folder if needed.
+
+__Stylesheets__
+
+The root component imports common .scss declarations like colours and typography. While it is not following the container
+pattern as followed in other parts, this allows you to have global CSS together with CSS defined in your components. It
+is also much easier to write client-specific CSS code in the future.
+
+The presentational component and (if needed) its children import their own CSS declarations from the
+*js/src/pages/Tasks/style* folder. This follows the concept of CSS modules meaning that any CSS code inside will become
+available just for that specific component which greatly reduces cascading issues across the application. It is possible
+to import without specifying an extension. CSS, SCSS and SASS are all supported. You can use @import directive to import
+files when you use the .scss extension.
