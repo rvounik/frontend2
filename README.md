@@ -85,6 +85,10 @@ deploy: (build, lint, test)
 
 # Development
 
+The whole application functions as a Single-page Application. Unknown at this point is whether the non-initial routes
+(or pages) are loaded from the beginning. In best case this is prefetched or lazy loaded when required. As such there
+is only one index.html file, the rest is rendered using the JSX syntax to allow writing HTML in Javascript.
+
 __Javascript__
 
 The Javascript code is structured in 3 basic concepts following best practices from React and Redux:
@@ -98,7 +102,7 @@ questionnaire. Also, this is the only place where reducers should be loaded, com
 2) Container component: *src/js/pages/Tasks/index.js*
 
 The container component defines actions, initial data, maps the state to props, dispatchers. In our old frontend this was
-stored in*containers/App.js* but wasnt really concerned with what it should be concerned with: just the data. What does
+stored in *containers/App.js* but wasnt really concerned with what it should be concerned with: just the data. What does
 the initial data look like, how is new data retrieved, how is data stored. It ensures this data is then passed on to a
 presentational component. Container components should be placed underneath 'pages', since each page in the application
 usually requires its own container- and child components and logic. Also, it should be called index.js to avoid
