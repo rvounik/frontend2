@@ -5,14 +5,16 @@ Rebuild our current *Frontend* as a standalone Javascript SPA with the following
 
 # Features
 
-Deployment
+__Deployment__
+
 - Webpack for task automation / bundling of files
 - NPM Scripts instead of Gulp / Grunt
 - Yarn instead of NPM (faster and improved caching of dependencies)
 - JS and CSS code is bundled, uglified, minified and its comments stripped
 - Sourcemaps for JS and CSS
 
-HTML and CSS
+__HTML and CSS__
+
 - Behaves like a Progressive Web Application (following manifest)
 - Fully HTML5, CSS3 compliant
 - Able to work offline (service-worker)
@@ -22,18 +24,21 @@ HTML and CSS
 - CSS Grid (replacing Bootstrap and Flexbox)
 - Aria support
 
-Javascript
+__Javascript__
+
 - Preact (with preact-compat) replaces React
 - Redux (with thunk?) for state management
 - Native Preact Routing (not Symfony)
 - support for ES2017 that transpiles to es5 (with polyfill)
 - Fully component based (master-slave pattern)
 
-Performance
+__Performance__
+
 - Much faster delivery using Gzipped assets and lazy loading
 - Much faster building of assets (and no more syncing issues?)
 
-Integration
+__Integration__
+
 - Communicates (using Fetch, instead of Ajax) with *Sexy Field* endpoints
 - Replaces current *Frontend* (and, if possible, *Styleguide*)
 - Has a way to implement access rights (roles) and translations
@@ -67,16 +72,56 @@ deploy: (build, lint, test)
 # Todo
 
 - add example CSS Grid implementation
-- add aria support for visually impaired
+- add ARIA support for visually impaired
 - figure out how not to load everything at once but lazy load the components that werent needed initially (prpl pattern)
 - figure out how application can load/show only the components the user has access to
 - add Dockerfile so a docker image can be built and frontend can run as a docker container
-- move repository to githost
+- move repository to Githost
 - figure out where the translations are loaded from
-- decide what to do with styleguide (may I recommend merging into frontend?)
+- decide what to do with *Styleguide* (may I recommend merging into frontend?)
 - implement neon frontend (static content)
-- refactor bootstrap to CSS Grid and remove the dependency
+- refactor bootstrap and remove the dependency
 - replace command flow with API calls using fetch (with proper error handling)
+
+# Development
+
+__Javascript__
+
+The Javascript code is structured in 3 basic concepts following best practices from React and Redux:
+
+1) Root component: *src/js/App.js*
+
+The root component combines reducers, sets up the Redux store and ties routing components together. There should only be
+one root component, unless specific applications need to be set up. For example, one just for filling in a
+questionnaire. Also, this is the only place where reducers should be loaded, combined and passed on to the store.
+
+2) Container component: *src/js/pages/Tasks/index.js*
+
+The container component defines actions, initial data, maps the state to props, dispatchers. In our old frontend this was
+stored in*containers/App.js* but wasnt really concerned with what it should be concerned with: just the data. What does
+the initial data look like, how is new data retrieved, how is data stored. It ensures this data is then passed on to a
+presentational component. Container components should be placed underneath 'pages', since each page in the application
+usually requires its own container- and child components and logic. Also, it should be called index.js to avoid
+confusion with presentational components and ease importing.
+
+3) Presentational component: *src/js/Tasks/js/Tasks.js*
+
+The presentational component is concerned with the actual layout. has its own css, and its own component methods. This
+is where you would store child components and methods that deal with presentation (ie tabs, modals, panels, sorting).
+Keep in mind that it is allowed to import generic components from the *src/js/components* folder if required. Likewise it
+is possible to import generic methods from the *src/js/utils* folder if needed.
+
+__Stylesheets__
+
+The root component imports common .scss declarations like colours and typography. While it is not following the container
+pattern as followed in other parts, this allows you to have global CSS together with CSS defined in your components. It
+is also much easier to write client-specific CSS code in the future.
+
+The presentational component and (optionally) its children import their own CSS declarations from the
+*js/src/pages/Tasks/style* folder. This follows the concept of CSS modules meaning that any CSS code inside will become
+available just for that specific component which greatly reduces cascading issues across the application. It is possible
+to import without specifying an extension. CSS, SCSS and SASS are all supported, but you can only use the *@import*
+directive in .scss files to import further .scss.
 
 # About tests
 
@@ -84,11 +129,11 @@ In the Frontend we should mostly be concerned with Functional Tests (also known 
 end user perspective, covering as much as possible from functionality, interaction and integration. As an example, when
 a button is clicked, does the state update? Or does the panel appear? Or, is the navigation bar populated initially?
 
-All Javascript omponents should contain functional tests that are stored under the test/ folder.
+All Javascript components should contain functional tests that are stored under the *js/src/**/test/* folder.
 
 # Mocking static assets and stylesheets
 
-You can mock the CSS and other filetypes by using fileMocks and identity-obj-proxy
+You can mock the CSS and other file types by using fileMocks and identity-obj-proxy
 
 `"jest": {
     "moduleNameMapper": {
@@ -103,7 +148,7 @@ see https://facebook.github.io/jest/docs/en/webpack.html
 
 # Mocking localStorage
 
-you can also mock localStorage, which wont be needed for our *Frontend* any time soon, so I have removed browserMocks.js:
+You can also mock localStorage, which wont be needed for our *Frontend* any time soon, so I have removed browserMocks.js:
 
 `const localStorageMock = (function() {
 let store = {};
@@ -161,43 +206,3 @@ and its configuration option from package.json:
 - "stylelint":                    checks for css lint (CLI version)
 - "uglifyjs-webpack-plugin":      uglifies, minifies javascript
 - "webpack":                      webpack is an advanced task runner
-
-# Development
-
-__Javascript__
-
-The Javascript code is structured in 3 basic concepts following best practices from React and Redux:
-
-1) Root component: *src/js/App.js*
-
-The root component combines reducers, sets up the Redux store and ties routing components together. There should only be
-one root component, unless specific applications need to be set up. For example, one just for filling in a
-questionnaire. Also, this is the only place where reducers should be loaded, combined and passed on to the store.
-
-2) Container component: *src/js/pages/Tasks/index.js*
-
-The container component defines actions, initial data, mapStateToProps, dispatchers. In our previous situation this was
-stored in*containers/App.js* but wasnt really concerned with what it should be concerned with: just the data. What does
-the initial data look like, how is new data retrieved, how is data stored. It ensures this data is then passed on to a
-presentational component. Container components should be placed underneath 'pages', since each page in the application
-usually requires its own container- and child components and logic. Also, it should be called index.js to avoid
-confusion with presentational components and ease importing.
-
-3) Presentational component: *src/js/Tasks/js/Tasks.js*
-
-The presentational component is concerned with the actual layout. has its own css, and its own component methods. This
-is where you would store child components and methods that deal with presentation (ie tabs, modals, panels, sorting).
-Keep in mind that it is allowed to import generic components from the *src/js/components* folder if required. Likewise it
-is possible to import generic methods from the *src/js/utils* folder if needed.
-
-__Stylesheets__
-
-The root component imports common .scss declarations like colours and typography. While it is not following the container
-pattern as followed in other parts, this allows you to have global CSS together with CSS defined in your components. It
-is also much easier to write client-specific CSS code in the future.
-
-The presentational component and (if needed) its children import their own CSS declarations from the
-*js/src/pages/Tasks/style* folder. This follows the concept of CSS modules meaning that any CSS code inside will become
-available just for that specific component which greatly reduces cascading issues across the application. It is possible
-to import without specifying an extension. CSS, SCSS and SASS are all supported. You can use @import directive to import
-files when you use the .scss extension.
