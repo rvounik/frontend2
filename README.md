@@ -94,7 +94,7 @@ deploy: (build, lint, test)
 
 # Development
 
-The whole application functions as a Single-page Application. Unknown at this point is whether the non-initial routes
+The whole application functions as a Single-Page Application. Unknown at this point is whether the non-initial routes
 (or pages) are loaded from the beginning. In best case this is pre-fetched or lazy loaded when required. As such there
 is only one index.html file, the rest is rendered using the JSX syntax to allow writing HTML in Javascript.
 
@@ -108,7 +108,7 @@ The root component combines reducers, sets up the Redux store and ties routing c
 one root component, unless specific applications need to be set up. For example, one just for filling in a
 questionnaire. Also, this is the only place where reducers should be loaded, combined and passed on to the store.
 
-2) Container component: *src/js/pages/Tasks/index.js*
+2) Container component: *src/js/pages/Example/index.js*
 
 The container component defines actions, initial data, maps the state to props, dispatchers. In our old frontend this was
 stored in *containers/App.js* but wasnt really concerned with what it should be concerned with: just the data. What does
@@ -117,7 +117,7 @@ presentational component. Container components should be placed underneath 'page
 usually requires its own container- and child components and logic. Also, it should be called index.js to avoid
 confusion with presentational components and ease importing.
 
-3) Presentational component: *src/js/Tasks/js/Tasks.js*
+3) Presentational component: *src/js/Example/js/Example.js*
 
 The presentational component is concerned with the actual layout. has its own css, and its own component methods. This
 is where you would store child components and methods that deal with presentation (ie tabs, modals, panels, sorting).
