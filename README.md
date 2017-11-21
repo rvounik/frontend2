@@ -57,11 +57,11 @@ build:
 
 `yarn run build (--watch)`
 
-run tests:
+test:
 
 `yarn run test`
 
-run linters:
+lint:
 
 `yarn run lint`
 
@@ -71,15 +71,24 @@ deploy: (build, lint, test)
 
 # Todo
 
-- add example CSS Grid implementation
+- fix warnings in production mode (and find out how to cycle environments)
+- fix tests and add new ones for Example component
+- add proptypes
+- refactor fetch request into an action
+- add state manipulation (redux) to the Example component
+- extend css linting rules
+- fix issue with unused declarations (the css module imports, mostly)
+
 - add ARIA support for visually impaired
-- figure out how not to load everything at once but lazy load the components that werent needed initially (prpl pattern)
-- figure out how application can load/show only the components the user has access to
+- figure out how not to load everything at once but lazy load the components that arent needed initially (prpl pattern)
 - add Dockerfile so a docker image can be built and frontend can run as a docker container
 - move repository to Githost
-- figure out where the translations are loaded from
+
 - decide what to do with *Styleguide* (may I recommend merging into frontend?)
 - implement neon frontend (static content)
+- refactor views using CSS Grid Layout
+- figure out where the translations are loaded from
+- figure out how application can load/show only the components the user has access to
 - refactor bootstrap and remove the dependency
 - replace command flow with API calls using fetch (with proper error handling)
 
@@ -119,8 +128,8 @@ is possible to import generic methods from the *src/js/utils* folder if needed.
 
 __Stylesheets__
 
-The root component imports common .scss declarations like colours and typography. While this does not follow the
-root-container pattern per se, it allows you to have global CSS together with specific CSS defined in your components.
+The root component imports common CSS declarations like colours and typography. While this does not follow the
+root-container pattern per se, it allows you to have global CSS together with the specific CSS defined in your components.
 It is also much easier to write client-specific CSS code in the future.
 
 The presentational component and (optionally) its children import their own CSS declarations from the
@@ -132,9 +141,9 @@ Keep in mind that every child component requires its own style import on top. Wi
 component. Also, specifically importing CSS will just assign the global selectors from it. To be able to use your own,
 custom selectors you will need to refer to your imported styles in your elements. For example:
 
-*import style from './../style/someMasterComponentStylesheet.css'*
+`import style from './../style/someMasterComponentStylesheet.css
 (...)
-*<someElement className={ style.someCustomSelector }*
+<someElement className={ style.someCustomSelector }`
 
 You can import any CSS type (CSS, SCSS, SASS) and don't even need to specify the extension (though your IDE may think
 differently). You can only use the *@import* directive in .scss files to import another .scss file.
