@@ -1,8 +1,9 @@
 @import './someimport.scss';
 
-.tasks {
+.example {
     color: green;
     font-size: 15px;
+
     button {
         background: red;
         color: white;
@@ -11,5 +12,10 @@
         margin: 20px;
         box-shadow: black;
         border-radius: 10px;
+    }
+
+    .someFilter {
+        background: lightblue;
+        padding: 5px;
     }
 }

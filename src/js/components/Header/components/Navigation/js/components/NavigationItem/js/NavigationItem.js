@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import style from './../style/navigation-item';
+import style from './../style/navigation-item.css';
 
 export default class navigationItem extends Component {
     constructor() {
@@ -12,7 +12,7 @@ export default class navigationItem extends Component {
         let { label, link } = this.props;
 
         return (
-            <li className="navigation-item"><a href={ link }>{ label }</a></li>
+            <li><a href={ link }>{ label }</a></li>
         )
     }
 }

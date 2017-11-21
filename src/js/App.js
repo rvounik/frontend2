@@ -10,16 +10,15 @@ import Router from 'preact-router';
 // react-redux: make the store available to all container components in the application without passing it explicitly
 import { Provider } from 'react-redux'
 
-// this defines the store we use (in old frontend: configureStore)
+// this defines the redux store
 import { createStore, combineReducers } from 'redux'
 
 // import all reducers
-import someReducer from './pages/Tasks/reducers/someReducer';
-//const test = Tasks.someReducer; // would something like this work? it saves having to import each reducer separately
+import exampleReducer from './pages/Example/reducers/example';
 
 // combine into one
 const rootReducer = combineReducers({
-    someReducer
+    exampleReducer
 });
 
 // configure redux store with the combined reducers
@@ -33,23 +32,20 @@ import common from './../style/common.scss';
  import AsyncRoute from 'preact-async-route';
  function getTasks(url, cb, props){ return System.import('./Tasks/Tasks').then(module => module.default) }
  <AsyncRoute path="/tasks" getComponent={ getTasks } /> */
-import Header from './components/Header/Header';
-import Inbox from './pages/Inbox/Inbox';
-import Organisations from './pages/Organisations/Organisations';
-import Tasks from './pages/Tasks';
+import Header from './components/Header';
+import Example from './pages/Example';
 
+// todo: provider expects a single element, find a fix for this
 render(
     <Provider store={ store }>
-    <section>
-        <Header key="header" />
-        <main>
-            <Router>
-                <Inbox exact path='/' />
-                <Organisations exact path='/organisations' />
-                <Tasks exact path='/tasks' />
-            </Router>
-        </main>
-    </section>
+        <section>
+            <Header key="header" />
+            <main>
+                <Router>
+                    <Example exact path='/example' />
+                </Router>
+            </main>
+        </section>
     </Provider>,
     document.getElementById('application')
 );

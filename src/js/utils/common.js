@@ -1,3 +1,5 @@
+// use common.js for functions that need to be executed on page load
+
 // performs feature query for navigator, then initialises service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

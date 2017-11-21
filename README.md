@@ -1,7 +1,7 @@
 
 # Description
 
-Rebuild our current *Frontend* as a standalone Javascript SPA with the following specs:
+Rebuild the current LTP *Frontend* as a standalone Javascript SPA with the following specs:
 
 # Features
 
@@ -19,7 +19,7 @@ __HTML and CSS__
 - Fully HTML5, CSS3 compliant
 - Able to work offline (service-worker)
 - CSS modules (CSS locally scoped and imported by the JS component)
-- support for CSS, SCSS, SASS (import without extension)
+- support for CSS, SCSS, SASS
 - PostCSS with NextCSS, Autoprefixer, CSSNano (and most SASS-like features)
 - CSS Grid (replacing Bootstrap and Flexbox)
 - Aria support
@@ -30,7 +30,7 @@ __Javascript__
 - Redux (with thunk?) for state management
 - Native Preact Routing (not Symfony)
 - support for ES2017 that transpiles to es5 (with polyfill)
-- Fully component based (master-slave pattern)
+- Fully component based (using root-presentational container pattern)
 
 __Performance__
 
@@ -39,7 +39,7 @@ __Performance__
 
 __Integration__
 
-- Communicates (using Fetch, instead of Ajax) with *Sexy Field* endpoints
+- Communicates (using Fetch, instead of Ajax) with *Section Field* endpoints
 - Replaces current *Frontend* (and, if possible, *Styleguide*)
 - Has a way to implement access rights (roles) and translations
 
@@ -86,7 +86,7 @@ deploy: (build, lint, test)
 # Development
 
 The whole application functions as a Single-page Application. Unknown at this point is whether the non-initial routes
-(or pages) are loaded from the beginning. In best case this is prefetched or lazy loaded when required. As such there
+(or pages) are loaded from the beginning. In best case this is pre-fetched or lazy loaded when required. As such there
 is only one index.html file, the rest is rendered using the JSX syntax to allow writing HTML in Javascript.
 
 __Javascript__
@@ -115,17 +115,29 @@ is where you would store child components and methods that deal with presentatio
 Keep in mind that it is allowed to import generic components from the *src/js/components* folder if required. Likewise it
 is possible to import generic methods from the *src/js/utils* folder if needed.
 
+(And did you know that *src/js/utils/common.js* gets executed on page load? useful for some third-party libraries!)
+
 __Stylesheets__
 
-The root component imports common .scss declarations like colours and typography. While it is not following the container
-pattern as followed in other parts, this allows you to have global CSS together with CSS defined in your components. It
-is also much easier to write client-specific CSS code in the future.
+The root component imports common .scss declarations like colours and typography. While this does not follow the
+root-container pattern per se, it allows you to have global CSS together with specific CSS defined in your components.
+It is also much easier to write client-specific CSS code in the future.
 
 The presentational component and (optionally) its children import their own CSS declarations from the
-*js/src/pages/Tasks/style* folder. This follows the concept of CSS modules meaning that any CSS code inside will become
-available just for that specific component which greatly reduces cascading issues across the application. It is possible
-to import without specifying an extension. CSS, SCSS and SASS are all supported, but you can only use the *@import*
-directive in .scss files to import further .scss.
+*js/src/pages/**/style* folder. This follows the concept of CSS modules meaning that any CSS code inside will become
+available just for that specific component. This means: no more conflicts, specific dependencies and no global scope.
+Selector names can be very simple this way although I'd still recommend sticking to BEM naming conventions.
+
+Keep in mind that every child component requires its own style import on top. Without this, no CSS is assigned to that
+component. Also, specifically importing CSS will just assign the global selectors from it. To be able to use your own,
+custom selectors you will need to refer to your imported styles in your elements. For example:
+
+*import style from './../style/someMasterComponentStylesheet.css'*
+(...)
+*<someElement className={ style.someCustomSelector }*
+
+You can import any CSS type (CSS, SCSS, SASS) and don't even need to specify the extension (though your IDE may think
+differently). You can only use the *@import* directive in .scss files to import another .scss file.
 
 # About tests
 
@@ -137,7 +149,7 @@ All Javascript components should contain functional tests that are stored under 
 
 # Mocking static assets and stylesheets
 
-You can mock the CSS and other file types by using fileMocks and identity-obj-proxy
+You can mock the CSS imports and imports for other file types by using fileMocks and identity-obj-proxy
 
 `"jest": {
     "moduleNameMapper": {
@@ -146,13 +158,9 @@ You can mock the CSS and other file types by using fileMocks and identity-obj-pr
     }
 }`
 
-I have for now removed CSS mocking since we are going to test against it. 
-
-see https://facebook.github.io/jest/docs/en/webpack.html
-
 # Mocking localStorage
 
-You can also mock localStorage, which wont be needed for our *Frontend* any time soon, so I have removed browserMocks.js:
+You can also mock localStorage, using browserMocks.js:
 
 `const localStorageMock = (function() {
 let store = {};
@@ -166,7 +174,7 @@ Object.defineProperty(window, 'localStorage', {
     value: localStorageMock
 });`
 
-and its configuration option from package.json:
+and its configuration option in package.json:
 
 `jest: {
     "setupFiles": [
