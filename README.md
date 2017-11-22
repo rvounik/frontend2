@@ -77,7 +77,7 @@ deploy: (build, lint, test)
 - refactor fetch request into an action
 - add state manipulation (redux) to the Example component
 - extend css linting rules
-- fix issue with unused declarations (the css module imports, mostly)
+- fix issue with unused declarations alert (js lint)
 
 - add ARIA support for visually impaired
 - figure out how not to load everything at once but lazy load the components that arent needed initially (prpl pattern)
@@ -227,3 +227,79 @@ and its configuration option in package.json:
 - "stylelint":                    checks for css lint (CLI version)
 - "uglifyjs-webpack-plugin":      uglifies, minifies javascript
 - "webpack":                      webpack is an advanced task runner
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------
+
+note on lazy loading and retrieving data:
+
+the components are lazy loaded. nothing is there initially: there is no initial state since we dont work with
+controllers. therefore the data in the application needs to load asynchronously. to do this, we will make more use
+of the lifecycle methods. every time a certain point in the application is reached that requires data, the component
+lifecycle method loads this data and the redux store keeps it.
+
+do you loose 'snappiness' ? I dont think so. once the data is there, it is displayed instantly, even after going to a
+different page/route/component and coming back this is snappier than it used to be in the old frontend, where each route
+required loading the data again. and sure enough, loading the page and views is faster, too. its instant once lazy
+loaded.
+
+
+// proposal organisations view data format thingie
+let organisationItems =
+[
+    selectedParentId: LTPROOT,
+    entities: [
+        [],
+        [],
+        [],
+    ]
+],
+[
+    selectedParentId: 123,
+    entities: [
+        [
+            type: project,
+            id: 123
+        ],
+        [
+            type: project,
+            id: 456
+        ],
+        [
+            type: project,
+            id: 789
+        ]
+    ]
+],
+[
+    selectedParentId: 456,
+    entities: [
+        [
+            type: jobfunction,
+            id: 987
+        ],
+    ]
+],
+
+// determines what content to show in detail panel
+let activeOrganisationItemId = 987;
+
+// determine from which point (column) the organisation view is rendered
+let startDisplayingFromOrganisationItem = 1;
+
+
+
+
+
+
+
+
+
+

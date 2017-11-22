@@ -3,18 +3,46 @@
 import { h, render, Component } from 'preact';
 /** @jsx h */
 
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+
+import * as exampleActions from './actions/example'
 
 import Example from './components/Example'
 
 class Index extends Component {
     constructor(props) {
         super(props);
+
+        const dispatch = this.props;
+        // The only use case for bindActionCreators is when you want to pass some action creators down to a component
+        // that isn't aware of Redux, and you don't want to pass dispatch or the Redux store to it.
+        this.actions = bindActionCreators(exampleActions, dispatch)
+
+        // this.actions = bindActionCreators(
+        //     Object.assign({}, exampleActions),
+        //     dispatch
+        // );
+
+        //this.addRandomItem = this.addRandomItem.bind(this)
+    }
+
+    componentDidMount() {
+        // let { dispatch } = this.props;
+        // let action = this.actions.addRandomItem('1234');
+        // console.log('result:'+action.type); // de uitkomst van de aanroep van de actie
+        // dispatch(action); // handle die ding in de store door die reducer dingetje
     }
 
     // this is where you'd normally put logic that deals with data (though in best case an action should handle this)
 
-    // todo: convert to an action
+    addRandomItem() {
+        // define action
+        let action = exampleActions.addRandomItem(parseInt(100 * Math.random()));
+
+        // dispatch the action (in frontend thunk was doing this for us and we merely called the action)
+        this.props.dispatch(action);
+    }
 
     // some example endpoint test (this uses a Promise to be asynchronous)
     apiEndpointRequest(url) {
@@ -51,20 +79,24 @@ class Index extends Component {
     }
 
     render() {
+        // todo: replace passed on dispatch prop with bindactioncreators thingie
         return (<Example
                 active={ this.props.active }
-                apiEndpointRequest={ this.apiEndpointRequest }
+                item={ this.props.item }
+                addRandomItem={ this.addRandomItem.bind(this) }
+                dispatch={this.dispatch}
             />)
     }
 }
 
-// defines initial data, then maps the state to props so it can be passed on to child components
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
-        active: true
+        active: state.active,
+        item: state.item
     }
 };
 
+// todo: you still need this?
 // action dispatchers
 // const mapDispatchToProps = (dispatch, ownProps) => {
 // 	return {

@@ -15,8 +15,10 @@ class Example extends Component {
     render() {
         // you can wrap this in a const or a condition if required
         const exampleItem = <ExampleItem
-            apiEndpointRequest={ this.props.apiEndpointRequest }
             style={ style }
+            item={ this.props.item }
+            addRandomItem={ this.props.addRandomItem }
+            dispatch={this.props.dispatch}
         />;
 
         return (
