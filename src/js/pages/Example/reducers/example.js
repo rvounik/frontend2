@@ -3,7 +3,7 @@ import * as actionType from './../constants/ActionTypes';
 // initially populate the state with defaults (there is no controller and thus no js.html.twig with default values)
 const initialState = {
     active: false,
-	item: null
+	item: 187
 };
 
 // export default function someReducer(state = initialState) {

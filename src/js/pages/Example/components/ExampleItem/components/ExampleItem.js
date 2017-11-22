@@ -32,6 +32,8 @@ class ExampleItem extends Component {
             activeText = '';
         }
 
+        console.log('this.props.item in the child component: '+this.props.item);
+
         let projectListItems = <li>{ item }</li>;
 
         return (

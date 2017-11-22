@@ -14,34 +14,20 @@ class Index extends Component {
     constructor(props) {
         super(props);
 
-        const dispatch = this.props;
+        const { dispatch } = this.props;
+
         // The only use case for bindActionCreators is when you want to pass some action creators down to a component
         // that isn't aware of Redux, and you don't want to pass dispatch or the Redux store to it.
-        this.actions = bindActionCreators(exampleActions, dispatch)
-
-        // this.actions = bindActionCreators(
-        //     Object.assign({}, exampleActions),
-        //     dispatch
-        // );
-
-        //this.addRandomItem = this.addRandomItem.bind(this)
-    }
-
-    componentDidMount() {
-        // let { dispatch } = this.props;
-        // let action = this.actions.addRandomItem('1234');
-        // console.log('result:'+action.type); // de uitkomst van de aanroep van de actie
-        // dispatch(action); // handle die ding in de store door die reducer dingetje
+        this.actions = bindActionCreators(
+            Object.assign({}, exampleActions),
+            dispatch
+        );
     }
 
     // this is where you'd normally put logic that deals with data (though in best case an action should handle this)
 
     addRandomItem() {
-        // define action
-        let action = exampleActions.addRandomItem(parseInt(100 * Math.random()));
-
-        // dispatch the action (in frontend thunk was doing this for us and we merely called the action)
-        this.props.dispatch(action);
+        this.actions.addRandomItem(parseInt(100 * Math.random()));
     }
 
     // some example endpoint test (this uses a Promise to be asynchronous)
@@ -84,15 +70,15 @@ class Index extends Component {
                 active={ this.props.active }
                 item={ this.props.item }
                 addRandomItem={ this.addRandomItem.bind(this) }
-                dispatch={this.dispatch}
             />)
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
-        active: state.active,
-        item: state.item
+        active: state.exampleReducer.active,
+        item: state.exampleReducer.item
     }
 };
 

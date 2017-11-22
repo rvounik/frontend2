@@ -18,7 +18,6 @@ class Example extends Component {
             style={ style }
             item={ this.props.item }
             addRandomItem={ this.props.addRandomItem }
-            dispatch={this.props.dispatch}
         />;
 
         return (
