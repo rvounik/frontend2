@@ -25,11 +25,8 @@ class Index extends Component {
 
     // this is where you'd normally put logic that deals with data
     addRandomItem() {
-        this.actions.addRandomItem(parseInt(100 * Math.random()));
-    }
+        let url = 'https://httpbin.org/uuid';
 
-    // some example endpoint test (this uses a Promise to be asynchronous)
-    apiEndpointRequest(url = 'https://httpbin.org/uuid') {
         fetch(url).then(response => {
             if (response.ok) {
                 // synchronous, will not work! (this is why you'd something like thunk, actually)
@@ -41,9 +38,10 @@ class Index extends Component {
                     // console.log('retrieved uuid: '+response.uuid);
 
                     // append element with the uuid as its name
-                    let entry = document.createElement('li');
-                    entry.appendChild(document.createTextNode(response.uuid));
-                    document.getElementById('project-list').appendChild(entry);
+                    // let entry = document.createElement('li');
+                    // entry.appendChild(document.createTextNode(response.uuid));
+                    // document.getElementById('project-list').appendChild(entry);
+                    this.actions.addRandomItem(response.uuid);
 
                 }).catch(error => {
                     return Promise.reject(console.log('JSON error: ' + error.message));
