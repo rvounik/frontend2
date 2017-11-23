@@ -5,7 +5,7 @@ import { h, Component } from 'preact';
 
 // import { PropTypes } from 'react';
 
-class ExampleItem extends Component {
+export default class ExampleItem extends Component {
     constructor(props) {
         super(props);
 
@@ -20,9 +20,9 @@ class ExampleItem extends Component {
     }
 
     render() {
-        let { style, item } = this.props;
+        let { style, items } = this.props;
         // style was passed on as a prop to be able to use a custom selector defined in it. alternatively it could have
-        // been imported again (file size won't increase) but it would be best to give this component its own css file
+        // been imported again (file size won't increase) but.. it would be best to give this component its own css file
 
         // since setState was used to update this var, the component re-renders and thus the localState is toggled
         let activeText;
@@ -32,15 +32,17 @@ class ExampleItem extends Component {
             activeText = '';
         }
 
-        console.log('this.props.item in the child component: '+this.props.item);
-
-        let projectListItems = <li>{ item }</li>;
+        let itemList = [];
+        if(items.length > 0) {
+            items.map((item) => {
+                itemList.push(<li>{ item.id }</li>)
+            })
+        }
 
         return (
-            // keep in mind, normally you'd extract this into a button and a list component, and perhaps even listItem
+            // keep in mind, normally you'd extract this into a button and a list component, and perhaps even a listItem
             <section>
                 <p>
-                    {/*<button onClick={ () => apiEndpointRequest('https://httpbin.org/uuid') } type="button">Add item +</button>*/}
                     <button onClick={ this.props.addRandomItem } type="button">Add random item +</button>
                     <br/><br/>
                     That will perform a 'real' Fetch request to an API endpoint and then use a Promise to append the element below when it returns.
@@ -54,7 +56,7 @@ class ExampleItem extends Component {
                     toggle 'someFilter'
                 </span>{ activeText }
                 <ul id="project-list">
-                    { projectListItems }
+                    { itemList }
                 </ul>
             </section>
         )
@@ -65,6 +67,4 @@ class ExampleItem extends Component {
 // ExampleItem.propTypes = {
 //     somethingthatwillerror: PropTypes.bool.isRequired
 // };
-
-export default ExampleItem;
 

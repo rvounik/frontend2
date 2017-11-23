@@ -3,29 +3,60 @@ import * as actionType from './../constants/ActionTypes';
 // initially populate the state with defaults (there is no controller and thus no js.html.twig with default values)
 const initialState = {
     active: false,
-	item: 187
+	items: [
+	    {id: 'initial item 1'},
+        {id: 'initial item 2'}
+    ]
 };
 
-// export default function someReducer(state = initialState) {
-// 	return state;
-// }
-
 export default function exampleReducer(state = initialState, action) {
-    // console.log('in reducer:');
-    // console.log('state.item:'+state.item);
-    // console.log('action.item:'+action.item);
-    // if (state.item !== action.item) {
-    //     console.log('updating state');
-    // }
     switch (action.type) {
+        // attempt to match the action type from the action.type parameter received from the action
         case actionType.ADD_RANDOM_ITEM:
-            //console.log('found right case');
-            console.log('old state: '+state.item);
-            let newState = Object.assign({}, state, {item: action.item});
-            console.log('newState: '+newState.item);
+            // define new state with received parameters from the action
+
+            // approach 1
+            // let newState = Object.assign({}, state, {
+            //     item: action.item
+            // });
             // return copy of state with items set to the given itemId
+            // return newState;
+
+            // approach 2
+            // let newState = Object.assign({}, state);
+            // newState.items.push(action.item);
+            // return copy of state with items set to the given itemId
+            // return newState;
+
+            // approach 3
+            // let items = state.items;
+            // console.log(items)
+            // items.push(action.item);
+            // console.log(items)
+            // return Object.assign({}, state, { items: items });
+
+            // approach 4
+            // console.log('before '+state.items);
+            // let newState = Object.assign({}, state.items);
+            // state = update(state, { items: newState.push(action.item) });
+            // console.log('after'+state.items);
+            // break
+
+            let newState = Object.assign({}, state);
+            newState.items.push(
+                {id: action.item}
+            );
+            //return copy of state with items set to the given itemId
             return newState;
+
+            // approach 6
+            // case ADD_ITEM :
+            //     return {
+            //         ...state,
+            //         arr: [...state.arr, action.newItem]
+            //     }
         default:
-            return state;
+            return state
     }
 }
+

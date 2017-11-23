@@ -7,7 +7,7 @@ import ExampleItem from './ExampleItem/components/ExampleItem.js';
 import formatDate from './../../../utils/formatDate.js';
 import style from './../style/example.scss';
 
-class Example extends Component {
+export default class Example extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,7 +16,7 @@ class Example extends Component {
         // you can wrap this in a const or a condition if required
         const exampleItem = <ExampleItem
             style={ style }
-            item={ this.props.item }
+            items={ this.props.items }
             addRandomItem={ this.props.addRandomItem }
         />;
 
@@ -29,5 +29,3 @@ class Example extends Component {
         )
     }
 }
-
-export default Example;

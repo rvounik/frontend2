@@ -229,6 +229,16 @@ and its configuration option in package.json:
 - "webpack":                      webpack is an advanced task runner
 
 
+note that ES6 spread operator is not supported yet since its not JS spec. so unless you include 3 huge plugings (of
+which one cannot be found) this isnt going to work. see this url for more details:
+
+https://github.com/babel/babel-preset-env/issues/326
+
+
+
+
+
+
 
 
 

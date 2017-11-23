@@ -4,13 +4,8 @@ import * as actionType from '../constants/ActionTypes';
 export function addRandomItem(itemId) {
     // fetch logic etc.
 
-    // console.log('in action:');
-    // console.log('action was called with actionType = '+actionType.ADD_RANDOM_ITEM);
-    // console.log('action was called with itemId = '+itemId);
-
     // return action type and the value to be send to reducer for state change
     return {
-        // this is returned to the caller so it can be dispatched and state can be updated
         type: actionType.ADD_RANDOM_ITEM,
         item: itemId
     };
