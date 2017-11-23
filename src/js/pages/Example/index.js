@@ -16,44 +16,31 @@ class Index extends Component {
 
         const { dispatch } = this.props;
 
-        // binds dispatch with action creators so dispatch or store doesnt need to be passed down to child components
+        // binds dispatch with action creators so dispatch or store does not need to be passed down to child components
         this.actions = bindActionCreators(
             Object.assign({}, exampleActions),
             dispatch
         );
     }
 
-    // this is where you'd normally put logic that deals with data
+    // note: since this is the container component, everything that deals with data should be defined right here
+    // this can be wrapped inside an action, but since its asynchronous you'd need middleware like thunk
+    // alternatively, define methods that are asynchronous itself and call the action whenever the request was successful
+
     addRandomItem() {
-        let url = 'https://httpbin.org/uuid';
-
-        fetch(url).then(response => {
+        fetch('https://httpbin.org/uuid').then(response => {
             if (response.ok) {
-                // synchronous, will not work! (this is why you'd something like thunk, actually)
-                // console.log('retrieved uuid: '+response.json().uuid);
-
+                // response.json() is not available yet. wrap it in a promise:
                 response.json().then((response) => {
-                    // asynchronous. using a promise. that will work
-                    // document.querySelector('#uuid').value = response.uuid;
-                    // console.log('retrieved uuid: '+response.uuid);
-
-                    // append element with the uuid as its name
-                    // let entry = document.createElement('li');
-                    // entry.appendChild(document.createTextNode(response.uuid));
-                    // document.getElementById('project-list').appendChild(entry);
                     this.actions.addRandomItem(response.uuid);
-
                 }).catch(error => {
                     return Promise.reject(console.log('JSON error: ' + error.message));
                 });
-
                 return response;
             }
-
             if (response.status === 404) {
                 return Promise.reject(console.log('Endpoint error: ' + url));
             }
-
             return Promise.reject(console.log('HTTP error: ' + response.status));
         }).catch(error => {
             return Promise.reject(console.log('URL error: '+error.message));

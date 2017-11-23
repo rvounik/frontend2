@@ -74,8 +74,6 @@ deploy: (build, lint, test)
 - fix warnings in production mode (and find out how to cycle environments)
 - fix tests and add new ones for Example component
 - add proptypes
-- refactor fetch request into an action
-- add state manipulation (redux) to the Example component
 - extend css linting rules
 - fix issue with unused declarations alert (js lint)
 
@@ -84,8 +82,8 @@ deploy: (build, lint, test)
 - add Dockerfile so a docker image can be built and frontend can run as a docker container
 - move repository to Githost
 
-- decide what to do with *Styleguide* (may I recommend merging into frontend?)
-- implement neon frontend (static content)
+- decide what to do with *Styleguide* (may I recommend merging into *Frontend*?)
+- implement *NeOn Frontend* (static content)
 - refactor views using CSS Grid Layout
 - figure out where the translations are loaded from
 - figure out how application can load/show only the components the user has access to
@@ -229,10 +227,16 @@ and its configuration option in package.json:
 - "webpack":                      webpack is an advanced task runner
 
 
-note that ES6 spread operator is not supported yet since its not JS spec. so unless you include 3 huge plugings (of
-which one cannot be found) this isnt going to work. see this url for more details:
+# Notes
+ 
+- Note that ES6 spread operator is not supported yet since its not JS spec. so unless you include 3 huge plugins (of
+which one cannot be found) this isnt going to work. See this url for more details: https://github.com/babel/babel-preset-env/issues/326
+- Currently there is no Redux middleware (Thunk) configured. Instead, all asynchronous code that communicates with
+external services is written using a Promise that calls the action when successful. This seems a better, safer approach.
+ 
 
-https://github.com/babel/babel-preset-env/issues/326
+
+
 
 
 
@@ -247,6 +251,8 @@ https://github.com/babel/babel-preset-env/issues/326
 
 
 ------------------------------------------------------------
+
+to-be-converted-to-notes:
 
 note on lazy loading and retrieving data:
 
@@ -303,13 +309,4 @@ let activeOrganisationItemId = 987;
 
 // determine from which point (column) the organisation view is rendered
 let startDisplayingFromOrganisationItem = 1;
-
-
-
-
-
-
-
-
-
 
