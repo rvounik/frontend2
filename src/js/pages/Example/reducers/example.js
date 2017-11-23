@@ -13,48 +13,27 @@ export default function exampleReducer(state = initialState, action) {
     switch (action.type) {
         // attempt to match the action type from the action.type parameter received from the action
         case actionType.ADD_RANDOM_ITEM:
-            // define new state with received parameters from the action
-
-            // approach 1
-            // let newState = Object.assign({}, state, {
-            //     item: action.item
-            // });
-            // return copy of state with items set to the given itemId
-            // return newState;
-
-            // approach 2
-            // let newState = Object.assign({}, state);
-            // newState.items.push(action.item);
-            // return copy of state with items set to the given itemId
-            // return newState;
-
-            // approach 3
-            // let items = state.items;
-            // console.log(items)
-            // items.push(action.item);
-            // console.log(items)
-            // return Object.assign({}, state, { items: items });
-
-            // approach 4
-            // console.log('before '+state.items);
-            // let newState = Object.assign({}, state.items);
-            // state = update(state, { items: newState.push(action.item) });
-            // console.log('after'+state.items);
-            // break
-
+            // copy the state (you cannot mutate the state directly)
             let newState = Object.assign({}, state);
-            newState.items.push(
-                {id: action.item}
-            );
-            //return copy of state with items set to the given itemId
+
+            // create temporary new array
+            let existingItems = [];
+
+            // loop through the existing items in the state, add each entry to the temporary new array
+            newState.items.map(item => {existingItems.push({id: item.id})});
+
+            // add the new entry taken from the action
+            existingItems.push({id: action.item});
+
+            // mutate the items in the copied state
+            newState.items = existingItems;
+
+            // return the copied, mutated state
             return newState;
 
-            // approach 6
-            // case ADD_ITEM :
-            //     return {
-            //         ...state,
-            //         arr: [...state.arr, action.newItem]
-            //     }
+            // while all this may seem like a hassle, it seems the only way to update nested properties:
+            // see https://redux.js.org/docs/faq/ReactRedux.html#react-not-rerendering
+            // alternatively, ensure the reducer receives a 'flattened' sub-state. google around for more options.
         default:
             return state
     }
