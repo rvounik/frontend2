@@ -59,6 +59,10 @@ build:
 
 `yarn run build (--watch)`
 
+build:prod:
+
+`yarn run build:prod (--watch)`
+
 test:
 
 `yarn run test`

@@ -1,6 +1,6 @@
 
-let sourceMapsEnabled = true;
-let gzippedAssets = true;
+let sourceMapsEnabled = false;
+let gzippedAssets = false;
 
 /* define plugins *****************************************************************************************************/
 
@@ -54,6 +54,9 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
+                options: {
+                    presets: ['env']
+                }
             },
             {
                 // process all SCSS/SASS/CSS file imported in the JS extracted by the above rule, excluding common.scss
@@ -138,7 +141,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             { from: './src/assets', to: './assets' },
-        ])
+        ]),
     ],
     resolve: {
         // to be able to import or require 'file' instead of 'file.js'

@@ -69,6 +69,7 @@
     },
     "scripts": {
         "build": "webpack",
+        "build:prod": "webpack -p",
         "deploy": "yarn run webpack && yarn run lint && yarn run jest",
         "test": "jest --no-cache",
         "lint:js": "eslint src test",
