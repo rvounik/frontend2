@@ -1,11 +1,13 @@
-{
+module.exports = {
     "parser": "babel-eslint",
     "extends": [
         "eslint:recommended",
+        "plugin:css-modules/recommended"
     ],
     "plugins": [
         "react",
-        "jest"
+        "jest",
+        "css-modules"
     ],
     "env": {
         "browser": true,
@@ -21,6 +23,12 @@
         }
     },
     "settings": {
+        "import/extensions": [
+            ".js",
+        ],
+        "import/ignore": [
+            "\.scss"
+        ],
         "react": {
             "pragma": "h"
         }
@@ -44,7 +52,7 @@
         "jest/no-disabled-tests": 1,
         "jest/no-focused-tests": 1,
         "jest/no-identical-title": 2,
-        "no-unused-vars": 1,
+        "no-unused-vars": [2, { "varsIgnorePattern": "style" }],
         "no-empty": 0,
         "no-console": 0,
         "no-empty-pattern": 0,
@@ -81,6 +89,7 @@
         "no-useless-concat": 2,
         "no-var": 2,
         "object-shorthand": 2,
-        "prefer-arrow-callback": 2
+        "prefer-arrow-callback": 2,
+        "no-case-declarations": 0
     }
-}
+};

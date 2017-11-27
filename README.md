@@ -10,38 +10,40 @@ __Deployment__
 - Webpack for task automation / bundling of files
 - NPM Scripts instead of Gulp / Grunt
 - Yarn instead of NPM (faster and improved caching of dependencies)
-- JS and CSS code is bundled, uglified, minified and its comments stripped
+- JS and CSS code is bundled, uglified, minified
 - Sourcemaps for JS and CSS
 
 __HTML and CSS__
 
 - Behaves like a Progressive Web Application (following manifest)
-- Fully HTML5, CSS3 compliant
-- Able to work offline (service-worker)
+- Fully HTML5, CSS3 compliant (using feature queries instead of modernizr)
+- Preconfigured to work offline (service-worker)
 - CSS modules (CSS locally scoped and imported by the JS component)
 - support for CSS, SCSS, SASS
 - PostCSS with NextCSS, Autoprefixer, CSSNano (and most SASS-like features)
-- CSS Grid (replacing Bootstrap and Flexbox)
-- Aria support
+- CSS Grid (replacing Bootstrap and Flexbox for layout)
+- Aria support (screen readers)
 
 __Javascript__
 
 - Preact (with preact-compat) replaces React
-- Redux (with thunk?) for state management
-- Native Preact Routing (not Symfony)
+- Redux handles state management
+- Native React/Preact Routing
 - support for ES2017 that transpiles to es5 (with polyfill)
-- Fully component based (using root-presentational container pattern)
+- Fully component based (using root-container-presentational pattern)
 
 __Performance__
 
 - Much faster delivery using Gzipped assets and lazy loading
 - Much faster building of assets (and no more syncing issues?)
+- Synchronous fetching (with proper error handling) but asynchronous DOM updates (without ghosting)
 
 __Integration__
 
 - Communicates (using Fetch, instead of Ajax) with *Section Field* endpoints
 - Replaces current *Frontend* (and, if possible, *Styleguide*)
 - Has a way to implement access rights (roles) and translations
+- Can automate building of forms based on *Section Field* configuration
 
 # Quick start
 
@@ -71,24 +73,19 @@ deploy: (build, lint, test)
 
 # Todo
 
-- fix warnings in production mode (and find out how to cycle environments)
-- fix tests and add new ones for Example component
-- add proptypes
-- extend css linting rules
-- fix issue with unused declarations alert (js lint)
-
+- fix warnings in production mode (and find out how to set environment flags)
+- add tests for Example component
 - add ARIA support for visually impaired
 - figure out how not to load everything at once but lazy load the components that arent needed initially (prpl pattern)
 - add Dockerfile so a docker image can be built and frontend can run as a docker container
 - move repository to Githost
-
 - decide what to do with *Styleguide* (may I recommend merging into *Frontend*?)
-- implement *NeOn Frontend* (static content)
+- implement *NeOn Frontend* (static content) on a per-page base
 - refactor views using CSS Grid Layout
 - figure out where the translations are loaded from
-- figure out how application can load/show only the components the user has access to
-- refactor bootstrap and remove the dependency
-- replace command flow with API calls using fetch (with proper error handling)
+- figure out how application can load/show only the components the user is authorised for
+- refactor components that use Bootstrap classes and remove the dependency
+- replace command flow with API calls using Fetch
 
 # Development
 
@@ -117,10 +114,11 @@ confusion with presentational components and ease importing.
 
 3) Presentational component: *src/js/Example/js/Example.js*
 
-The presentational component is concerned with the actual layout. has its own css, and its own component methods. This
+The presentational component is concerned with the actual layout. Has its own css, and its own component methods. This
 is where you would store child components and methods that deal with presentation (ie tabs, modals, panels, sorting).
 Keep in mind that it is allowed to import generic components from the *src/js/components* folder if required. Likewise it
-is possible to import generic methods from the *src/js/utils* folder if needed.
+is possible to import generic methods from the *src/js/utils* folder if needed. These components need to be as small and
+simple as possible! All non-UI logic needs to be defined in the container component!
 
 (And did you know that *src/js/utils/common.js* gets executed on page load? useful for some third-party libraries!)
 
@@ -150,7 +148,7 @@ differently). You can only use the *@import* directive in .scss files to import 
 
 In the Frontend we should mostly be concerned with Functional Tests (also known as Integration Tests) written from the
 end user perspective, covering as much as possible from functionality, interaction and integration. As an example, when
-a button is clicked, does the state update? Or does the panel appear? Or, is the navigation bar populated initially?
+a button is clicked, does the state update? Or, does panel X appear? Or, is the navigation bar populated initially?
 
 All Javascript components should contain functional tests that are stored under the *js/src/**/test/* folder.
 
@@ -206,6 +204,7 @@ and its configuration option in package.json:
 - "css-loader":                   loads css
 - "cssnano":                      compresses css and removes comments
 - "eslint":                       checks for javascript lint (CLI version)
+- "eslint-plugin-css-modules":    will check for unused css declarations
 - "eslint-plugin-jest":           contains linting support for jest
 - "eslint-plugin-react":          contains linting support for react
 - "extract-text-webpack-plugin":  allows extracting css imports from js components
@@ -230,7 +229,7 @@ and its configuration option in package.json:
 # Notes
  
 - Note that ES6 spread operator is not supported yet since its not JS spec. so unless you include 3 huge plugins (of
-which one cannot be found) this isnt going to work. See this url for more details: https://github.com/babel/babel-preset-env/issues/326
+which one cannot be found) this isnt going to work. More details: https://github.com/babel/babel-preset-env/issues/326
 - Currently there is no Redux middleware (Thunk) configured. Instead, all asynchronous code that communicates with
 external services is written using a Promise that calls the action when successful. This seems a better, safer approach.
  

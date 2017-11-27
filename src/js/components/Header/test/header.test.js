@@ -15,21 +15,21 @@ test('check if Navigation items are populated', () => {
     const context = shallow(<Header/>);
 
     expect(context.find('Navigation').attr('items')).toEqual([
-        {"label": "tasks", "link": "/tasks"}
+        {"label": "example-navigation-item", "link": "/example"}
     ]);
 });
 
 test('use \'deep\' instead of \'shallow\' to test child component (in which you\'d normally write these tests)', () => {
     const context = deep(<Header/>);
 
-    expect(context.find('a').length).toBe(1);
-    expect(context.find('li').contains(<a href="/">inbox</a>)).toBeTruthy();
+    expect(context.find('a').length).toBe(2);
+    expect(context.find('li').contains(<a href="/example">example-navigation-item</a>)).toBeTruthy();
 });
 
 test('check for link validity', () => {
     const context = deep(<Header/>);
-    const child = (context.find('a').at(1));
+    const child = (context.find('a').at(0));
 
-    expect(child.attr('href')).toBe('/tasks');
+    expect(child.attr('href')).toBe('/');
     child.simulate('click'); // dont test if link is being followed. instead test state or className change
 });

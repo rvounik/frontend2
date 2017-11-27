@@ -3,7 +3,7 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-// import { PropTypes } from 'react';
+import style from './../style/exampleitem.scss';
 
 export default class ExampleItem extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ export default class ExampleItem extends Component {
     }
 
     render() {
-        let { style, items } = this.props;
+        let { items, addRandomItem } = this.props;
         // style was passed on as a prop to be able to use a custom selector defined in it. alternatively it could have
         // been imported again (file size won't increase) but.. it would be best to give this component its own css file
 
@@ -33,7 +33,7 @@ export default class ExampleItem extends Component {
         }
 
         let itemList = [];
-        if(items.length > 0) {
+        if (items.length > 0) {
             items.map((item) => {
                 itemList.push(<li>{ item.id }</li>)
             })
@@ -43,7 +43,7 @@ export default class ExampleItem extends Component {
             // keep in mind, normally you'd extract this into a button and a list component, and perhaps even a listItem
             <section>
                 <p>
-                    <button onClick={ this.props.addRandomItem } type="button">Add random item +</button>
+                    <button onClick={ addRandomItem } type="button">Add random item +</button>
                     <br/><br/>
                     That will perform a 'real' Fetch request to an API endpoint and then use a Promise to append the element below when it returns.
                 </p>
@@ -62,9 +62,3 @@ export default class ExampleItem extends Component {
         )
     }
 }
-
-// todo: fix proptypes implementation
-// ExampleItem.propTypes = {
-//     somethingthatwillerror: PropTypes.bool.isRequired
-// };
-

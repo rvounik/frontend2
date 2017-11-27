@@ -16,7 +16,7 @@ class Header extends Component {
 
         return (
             <header className={ style.header }>
-                <a href="/"><figure /></a>
+                <a href="/"><figure className="logo" /></a>
                 <Navigation items={ navigationItems } />
             </header>
         )

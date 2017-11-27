@@ -1,6 +1,6 @@
 // the container component defines actions, initial data, mapStateToProps, dispatchers
 
-import { h, render, Component } from 'preact';
+import { h, Component } from 'preact';
 /** @jsx h */
 
 import { bindActionCreators } from 'redux';
@@ -39,7 +39,7 @@ class Index extends Component {
                 return response;
             }
             if (response.status === 404) {
-                return Promise.reject(console.log('Endpoint error: ' + url));
+                return Promise.reject(console.log('Endpoint error: '));
             }
             return Promise.reject(console.log('HTTP error: ' + response.status));
         }).catch(error => {
