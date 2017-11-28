@@ -68,12 +68,12 @@
         }
     },
     "scripts": {
-        "build": "webpack",
-        "build:prod": "webpack -p",
-        "deploy": "yarn run webpack && yarn run lint && yarn run jest",
         "test": "jest --no-cache",
+        "lint": "yarn run lint:js && yarn run lint:css",
         "lint:js": "eslint src test",
         "lint:css": "stylelint src/**/*.css src/**/*.scss --syntax scss",
-        "lint": "yarn run lint:js && yarn run lint:css"
+        "build": "webpack",
+        "build:prod": "webpack -p",
+        "deploy": "yarn run lint && yarn run jest && yarn run webpack -p"
     }
 }

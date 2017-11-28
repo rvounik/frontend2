@@ -144,7 +144,7 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: './src/assets', to: './assets' },
         ]),
-    ],
+],
     resolve: {
         // to be able to import or require 'file' instead of 'file.js'
         extensions: ['.js', '.scss', '.sass', '.css'],
@@ -155,3 +155,8 @@ module.exports = {
         }
     }
 };
+
+
+
+
+
