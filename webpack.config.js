@@ -123,8 +123,10 @@ module.exports = {
                 parallel: true,
                 compress: {
                     ecma: 5,
-                    warnings: false
+                    ie8: true,
+                    warnings: true
                 },
+                mangle: false,
                 output: {
                     comments: false
                 }

@@ -45,7 +45,8 @@ export default class ExampleItem extends Component {
                 <p>
                     <button onClick={ addRandomItem } type="button">Add random item +</button>
                     <br/><br/>
-                    That will perform a 'real' Fetch request to an API endpoint and then use a Promise to append the element below when it returns.
+                    That will perform a 'real' Fetch request to an API endpoint and then use a Promise to append the
+                    element below when it returns.
                 </p>
                 <br />
                 <br />

@@ -14,12 +14,10 @@ class Header extends Component {
             { label: 'example-navigation-item', link:'/example' }
         ];
 
-        return (
-            <header className={ style.header }>
+        return (<header className={ style.header }>
                 <a href="/"><figure className="logo" /></a>
                 <Navigation items={ navigationItems } />
-            </header>
-        )
+            </header>)
     }
 }
 

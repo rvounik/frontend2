@@ -25,7 +25,7 @@ class Index extends Component {
 
     // note: since this is the container component, everything that deals with data should be defined right here
     // this can be wrapped inside an action, but since its asynchronous you'd need middleware like thunk
-    // alternatively, define methods that are asynchronous itself and call the action whenever the request was successful
+    // alternatively define a method that is asynchronous itself and call the action whenever the request was successful
 
     addRandomItem() {
         fetch('https://httpbin.org/uuid').then(response => {
@@ -43,16 +43,18 @@ class Index extends Component {
             }
             return Promise.reject(console.log('HTTP error: ' + response.status));
         }).catch(error => {
-            return Promise.reject(console.log('URL error: '+error.message));
+            return Promise.reject(console.log('URL error: ' + error.message));
         });
     }
 
     render() {
-        return (<Example
+        return (
+            <Example
                 active={ this.props.active }
                 items={ this.props.items }
                 addRandomItem={ this.addRandomItem.bind(this) }
-            />)
+            />
+        )
     }
 }
 

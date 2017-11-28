@@ -35,7 +35,6 @@ import style from './../style/common.scss';
 import Header from './components/Header';
 import Example from './pages/Example';
 
-// todo: provider expects a single element, find a fix for this
 render(
     <Provider store={ store }>
         <section>
@@ -43,8 +42,6 @@ render(
             <main>
                 <Router>
                     <Example exact path='/example' />
-                    <Example exact path='/example' /><Example exact path='/example' /><Example exact path='/example' /><Example exact path='/example' />
-
                 </Router>
             </main>
         </section>
@@ -52,8 +49,9 @@ render(
     document.getElementById('application')
 );
 
+// this will show a console message depending on the environment the assets were built for
 if (process.env.NODE_ENV === "production") {
-    console.log('prod')
+    console.log('running in production mode');
 } else {
-    console.log('dev');
+    console.log('running in dev mode');
 }

@@ -77,7 +77,6 @@ deploy: (build, lint, test)
 
 # Todo
 
-- fix warnings in production mode (and find out how to set environment flags)
 - add tests for Example component
 - add ARIA support for visually impaired
 - figure out how not to load everything at once but lazy load the components that arent needed initially (prpl pattern)
@@ -199,7 +198,8 @@ and its configuration option in package.json:
 - "babel-eslint":                 used babel parser for linting
 - "babel-jest":                   used by the transformPreprocessor that converts JSX before running tests
 - "babel-loader":                 loads js during webpacks process
-- "babel-preset-env":             allows transpiling es2015+ code to specified browser version (or default, which is es5)
+- "babel-polyfill":
+- "babel-preset-env":             allows transpiling es2015+ code to specified browser version (defaults to es5)
 - "babel-preset-preact":          allows handling of JSX during transpiling
 - "classnames":                   used to apply multiple classes to components
 - "clean-webpack-plugin":         cleans out folders before copying new files in during deploy
@@ -224,6 +224,8 @@ and its configuration option in package.json:
 - "preact-render-spy":            collection of tools to facilitate jest testing
 - "preact-router":                routing framework
 - "precss":                       this is a module for postcss for mixins and nesting support
+- "react-redux":
+- "redux":
 - "style-loader":                 loads the styles
 - "stylelint":                    checks for css lint (CLI version)
 - "uglifyjs-webpack-plugin":      uglifies, minifies javascript
@@ -236,7 +238,8 @@ and its configuration option in package.json:
 which one cannot be found) this isnt going to work. More details: https://github.com/babel/babel-preset-env/issues/326
 - Currently there is no Redux middleware (Thunk) configured. Instead, all asynchronous code that communicates with
 external services is written using a Promise that calls the action when successful. This seems a better, safer approach.
- 
+- You can build for production using yarn run build:prod. This changes the outcome of some of the configured tasks.
+- Note that in dev mode console will throw a warning invalid prop children supplied. Please ignore this for now.
 
 
 
