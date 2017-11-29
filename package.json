@@ -42,6 +42,7 @@
         "webpack": "^3.7.1"
     },
     "jest": {
+        "automock": false,
         "verbose": true,
         "testURL": "http://localhost:9000",
         "transform": {
@@ -65,7 +66,9 @@
             "^react-dom$": "preact-compat",
             "^create-react-class$": "preact-compat/lib/create-react-class",
             "^react-addons-css-transition-group$": "preact-css-transition-group"
-        }
+        },
+        "testEnvironment": "jsdom",
+        "roots": ["src/js/pages/Example/components/ExampleItem/"]
     },
     "scripts": {
         "test": "jest --no-cache",
@@ -74,6 +77,6 @@
         "lint:css": "stylelint src/**/*.css src/**/*.scss --syntax scss",
         "build": "webpack",
         "build:prod": "webpack -p",
-        "deploy": "yarn run lint && yarn run jest && yarn run webpack -p"
+        "deploy": "yarn run lint && yarn run jest && yarn run build:prod"
     }
 }

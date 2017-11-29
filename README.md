@@ -149,11 +149,12 @@ differently). You can only use the *@import* directive in .scss files to import 
 
 # About tests
 
-In the Frontend we should mostly be concerned with Functional Tests (also known as Integration Tests) written from the
-end user perspective, covering as much as possible from functionality, interaction and integration. As an example, when
-a button is clicked, does the state update? Or, does panel X appear? Or, is the navigation bar populated initially?
+In the Frontend we should only be concerned with Functional Tests (closely related to Integration Tests) written from
+the end user perspective, covering as much as possible from functionality, interaction and integration. As an example,
+when a button is clicked, does the state update? Or, does panel X appear? Or, is the navigation bar populated initially?
 
-All Javascript components should contain functional tests that are stored under the *js/src/**/test/* folder.
+All Javascript components should contain such functional tests stored in the *js/src/**/test/* folder. Structurally they
+are written in BDD-style: test(), expect(), describe()), it('should'), toBeString() etc.
 
 # Mocking static assets and stylesheets
 

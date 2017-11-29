@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import { shallow, deep } from 'preact-render-spy';
 
 // test examples: https://github.com/mzgoddard/preact-render-spy/blob/master/src/shared-render.test.js
+// cheat sheet: https://devhints.io/jest
 
 test('check if Header is rendering empty figure with class \'logo\'', () => {
     const context = shallow(<Header/>);
