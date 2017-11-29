@@ -23,6 +23,8 @@ export default class Example extends Component {
 
         let someDate = showCurrentTime();
 
+        console.log(someDate);
+
         return (
             <section className={ style.example }>
                 <span>{ someDate }</span>

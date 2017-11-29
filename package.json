@@ -68,7 +68,7 @@
             "^react-addons-css-transition-group$": "preact-css-transition-group"
         },
         "testEnvironment": "jsdom",
-        "roots": ["src/js/pages/Example/components/ExampleItem/"]
+        "roots": ["src/js"]
     },
     "scripts": {
         "test": "jest --no-cache",

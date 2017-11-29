@@ -1,21 +1,23 @@
+jest.mock('../../../utils/showCurrentTime.js', () => jest.fn()); // this happens automatically with automocking
+
 import Example from '../components/Example';
+import showCurrentTime from '../../../utils/showCurrentTime.js';
 import { shallow } from 'preact-render-spy';
 
-test('check if Example is rendering', () => {
+test('check if ExampleItem is rendering', () => {
     const context = shallow(<Example/>);
 
     expect(context.find('span')).toBeTruthy();
 });
 
-// todo: get this working
-// test('check if span element contains time', () => {
-//     const context = shallow(<Example/>);
+// todo: for some reason jest refuses to return data for the mocked import
+
+// test('check if Example is rendering a timestamp', () => {
+//     const context = shallow(<Example />);
 //
-//     showCurrentTime.showCurrentTime = jest.fn(
-//         () => { return '123' }
-//     );
+//     showCurrentTime.mockImplementation(() => {
+//         return '11:11';
+//     });
 //
-//     console.log(context.find('section')[0].children);
-//
-//     expect(context.find('section').contains(<span>123</span>)).toBeTruthy();
+//      expect(context.find('span').at(0).text()).toBe('11:11');
 // });

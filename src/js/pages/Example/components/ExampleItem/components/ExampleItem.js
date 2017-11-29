@@ -16,11 +16,12 @@ export default class ExampleItem extends Component {
     }
 
     // lifecycle methods go here
-    componentDidUpdate() {
+    componentDidMount() {
     }
 
     render() {
         let { items, addRandomItem } = this.props;
+
         // style was passed on as a prop to be able to use a custom selector defined in it. alternatively it could have
         // been imported again (file size won't increase) but.. it would be best to give this component its own css file
 
@@ -33,7 +34,7 @@ export default class ExampleItem extends Component {
         }
 
         let itemList = [];
-        if (items.length > 0) {
+        if (items && items.length > 0) {
             items.map((item) => {
                 itemList.push(<li>{ item.id }</li>)
             })
