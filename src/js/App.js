@@ -30,7 +30,6 @@ let store = createStore(rootReducer);
 // import common css so it becomes available in all page components. also easier to have client specific css this way!
 import style from './../style/common.scss';
 
-// these will create separate .js files (0.js, 1.js etc) however I do not see app.js shrinking because of this :(
 function getExample(){
     return System.import('./pages/Example').then(module => module.default)
 }
@@ -40,8 +39,6 @@ function getExampler(){
 }
 
 import Header from './components/Header';
-// import Example from './pages/Example';
-// import Exampler from './pages/Exampler';
 
 render(
     <Provider store={ store }>

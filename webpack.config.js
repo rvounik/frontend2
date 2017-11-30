@@ -45,7 +45,6 @@ module.exports = {
         filename: 'js/[name].js',
         sourceMapFilename: '[file].map',
         chunkFilename: './../web/js/[name].js'
-        //chunkFilename: 'js/[name].[chunkhash].js'
     },
     devtool: sourceMapsEnabled ? 'cheap-module-eval-source-map' : false,
     module: {

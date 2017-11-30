@@ -1,4 +1,9 @@
 // configure cache
+
+// keep in mind this only makes sense for parts of the application that can work offline and do not require fetching
+// or storing data all the time. in other words, do not use this for the general NeOn stuff, only for questionnaires
+
+
 var doCache = false;
 var CACHE_NAME = 'rvo-pwa';
 
@@ -30,7 +35,12 @@ self.addEventListener('install', function (event) {
                 .then(function (cache) {
                     const urlsToCache = [
                         "/",
-                        "index.html"
+                        "index.html",
+                        "web/js/app.js",
+                        "web/js/common.js",
+                        "web/css/app.css",
+                        "web/js/0.js",
+                        "web/js/1.js",
                     ];
                     cache.addAll(urlsToCache);
                     console.log('ServiceWorker cached the following files: ' + urlsToCache);
