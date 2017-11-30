@@ -91,9 +91,8 @@ deploy: (build, lint, test)
 
 # Development
 
-The whole application functions as a Single-Page Application. Unknown at this point is whether the non-initial routes
-(or pages) are loaded from the beginning. In best case this is pre-fetched or lazy loaded when required. As such there
-is only one index.html file, the rest is rendered using the JSX syntax to allow writing HTML in Javascript.
+The whole application functions as a Single-Page Application. Only the logic for the current route is loaded initially.
+There is only one index.html file, the rest is rendered using the JSX syntax to allow writing HTML in Javascript.
 
 __Javascript__
 
@@ -107,12 +106,12 @@ questionnaire. Also, this is the only place where reducers should be loaded, com
 
 2) Container component: *src/js/pages/Example/index.js*
 
-The container component defines actions, initial data, maps the state to props, dispatchers. In our old frontend this was
-stored in *containers/App.js* but wasnt really concerned with what it should be concerned with: just the data. What does
-the initial data look like, how is new data retrieved, how is data stored. It ensures this data is then passed on to a
-presentational component. Container components should be placed underneath 'pages', since each page in the application
-usually requires its own container- and child components and logic. Also, it should be called index.js to avoid
-confusion with presentational components and ease importing.
+The container component defines actions, initial data, maps the state to props, configures dispatchers. In our old
+*Frontend* this was stored in *containers/App.js* but wasnt really concerned with what it should be concerned with: just
+the data. What does the initial data look like, how is new data retrieved, how is data stored. It ensures this data is
+then passed on to a presentational component. Container components should be placed underneath 'pages', since each page
+in the application usually requires its own container- and child components and logic. Also, it should be called
+index.js to avoid confusion with presentational components and ease importing.
 
 3) Presentational component: *src/js/Example/js/Example.js*
 
@@ -120,9 +119,8 @@ The presentational component is concerned with the actual layout. Has its own cs
 is where you would store child components and methods that deal with presentation (ie tabs, modals, panels, sorting).
 Keep in mind that it is allowed to import generic components from the *src/js/components* folder if required. Likewise it
 is possible to import generic methods from the *src/js/utils* folder if needed. These components need to be as small and
-simple as possible! All non-UI logic needs to be defined in the container component!
-
-(And did you know that *src/js/utils/common.js* gets executed on page load? useful for some third-party libraries!)
+simple as possible! All non-UI logic needs to be defined in the container component! UI-logic can be stored in a local
+state which I would call localState to avoid confusing with the 'real' state.
 
 __Stylesheets__
 
@@ -133,29 +131,32 @@ It is also much easier to write client-specific CSS code in the future.
 The presentational component and (optionally) its children import their own CSS declarations from the
 *js/src/pages/**/style* folder. This follows the concept of CSS modules meaning that any CSS code inside will become
 available just for that specific component. This means: no more conflicts, specific dependencies and no global scope.
-Selector names can be very simple this way although I'd still recommend sticking to BEM naming conventions.
+Because of this, selector names can be very simple although I'd still recommend sticking to BEM naming conventions.
 
 Keep in mind that every child component requires its own style import on top. Without this, no CSS is assigned to that
 component. Also, specifically importing CSS will just assign the global selectors from it. To be able to use your own,
 custom selectors you will need to refer to your imported styles in your elements. For example:
 
-`import style from './../style/someMasterComponentStylesheet.css
-(...)
-<someElement className={ style.someCustomSelector }`
+`import style from './../style/someMasterComponentStylesheet.css`
+
+`<someElement className={ style.someCustomSelector }`
 
 You can import any CSS type (CSS, SCSS, SASS) and don't even need to specify the extension (though your IDE may think
-differently). You can only use the *@import* directive in .scss files to import another .scss file.
+differently). Note however that you can only use the *@import* directive in .scss files to import another .scss file.
 
 # About lazy-loading
 
 The preact-async-route package is used to lazy-load components. Instead of importing every component in App.js, define
 functions that load the specific component when the user requests the route. Webpack automatically recognises these
 system imports and writes separate 0.js, 1.js etc. bundles for those. Because of this, it doesnt make much sense to turn
-the project into a PWA. This would only mean all split JS bundles are loaded right at the start. Then again, having a
-service-worker for a data-driven application like NeOn is perhaps a bit too much. Instead, implement the service-worker
-for specific parts of the application where offline usage makes sense, for example the questionnaire part.
+the project into a PWA. This would only mean all split JS bundles are loaded right at the start.
 
-Technically the data for a component should be loaded when the component gets mounted Ideally I would use the React
+But then, having a service-worker for a data-driven application like NeOn is perhaps a bit useless. Instead, implement
+the service-worker a specific parts in the application where offline usage makes sense, for example the questionnaires.
+
+### Loading of data
+
+Technically the data for a component should be loaded when the component gets mounted. Ideally I would use the React
 lifecycle methods for these. Remember, there is no initial state like in our old *Frontend*. This is no problem though,
 after loading data for the first time it will remain in the store, even when you navigate to different routes. The
 application will feel even snappier than it used to, thanks to the code splitting and heavily cut-down and compressed
@@ -167,15 +168,15 @@ In the Frontend we should only be concerned with Functional Tests (closely relat
 the end user perspective, covering as much as possible from functionality, interaction and integration. As an example,
 when a button is clicked, does the state update? Or, does panel X appear? Or, is the navigation bar populated initially?
 
-All Javascript components should contain such functional tests stored in the *js/src/**/test/* folder. They are using
-the Jest framework and preact-render-spy package is used to connect with Preact and allow Enzyme-style syntax written
-in BDD-style like test(), expect(), describe() it(should) etc.
+All Javascript components should contain such functional tests and they should be stored in the *js/src/**/test/*
+folder. They are using the Jest testing framework together with the preact-render-spy package to integrate with Preact.
+Tests are written in BDD-style: test(), expect(), describe() it(should) etc. You can use basic Enzyme-style assertions.
 
 ## Mocking in tests
 
 There are various ways you can mock parts of your code during testing:
 
-### Setting or mocking state and props
+##### Setting or mocking state and props
 
 First off, you need to be aware of the difference between shallow and deep testing. When shallow testing a child
 component, pass on its props like you would in the actual code:
@@ -199,19 +200,19 @@ expect(context.state()).toEqual({
         {id: 'item 2'}
     ]`
 
-### Mocking a (parent) function
+##### Mocking a (parent) function
 
-You can use the jest mocking function. At the top of your test file, put:
+You can use the Jest mocking function. At the top of your test file, put:
 
 `jest.mock('../../../utils/showCurrentTime.js', () => jest.fn().mockReturnValue('12:34'));`
 
 This is mocking the actual import in your code and will return the specified output value.
 
-Now you can write your expect this way:
+Now you can write your Expect this way:
 
 `expect(context.find('span').at(0).text()).toBe('12:34');`
 
-### Mocking static assets and stylesheets
+##### Mocking static assets and stylesheets
 
 You can mock the CSS imports and imports for other file types by using fileMocks and identity-obj-proxy
 
@@ -222,7 +223,7 @@ You can mock the CSS imports and imports for other file types by using fileMocks
     }
 }`
 
-### Mocking localStorage
+##### Mocking localStorage
 
 You can also mock localStorage, using browserMocks.js:
 
@@ -291,10 +292,12 @@ and its configuration option in package.json:
 
 # Notes
  
-- Note that ES6 spread operator is not supported yet since its not JS spec. so unless you include 3 huge plugins (of
+- Note that ES6 spread operator is not supported yet since its not JS spec. So unless you include 3 huge plugins (of
 which one cannot be found) this isnt going to work. More details: https://github.com/babel/babel-preset-env/issues/326
 - Currently there is no Redux middleware (Thunk) configured. Instead, all asynchronous code that communicates with
 external services is written using a Promise that calls the action when successful. This seems a better, safer approach.
 - You can build for production using yarn run build:prod. This changes the outcome of some of the configured tasks.
 - Note that in dev mode console will throw a warning invalid prop children supplied. Please ignore this for now.
 - To run a specific test, edit the "roots" key in package.json
+- Note that *src/js/utils/common.js* gets executed on page load. Useful for some third-party libraries!)
+- Configuration for the ES and CSS linter can be found in the root of the project.
