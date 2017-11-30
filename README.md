@@ -47,6 +47,8 @@ __Integration__
 
 # Quick start
 
+Just install, build and run the project. You will find commands for common tasks below:
+
 install dependencies:
 
 `yarn install`
@@ -147,16 +149,66 @@ custom selectors you will need to refer to your imported styles in your elements
 You can import any CSS type (CSS, SCSS, SASS) and don't even need to specify the extension (though your IDE may think
 differently). You can only use the *@import* directive in .scss files to import another .scss file.
 
+# About lazy-loading
+
+The preact-async-route package is used to lazy-load components. Instead of importing every component in App.js, define
+functions that load the specific component when the user requests the route. Webpack automatically recognises these
+system imports and writes separate 0.js, 1.js etc. bundles for those. Because of this, it doesnt make much sense to turn
+the project into a PWA. This would only mean all split JS bundles are loaded right at the start. Then again, having a
+service-worker for a data-driven application like NeOn is perhaps a bit too much. Instead, implement the service-worker
+for specific parts of the application where offline usage makes sense, for example the questionnaire part.
+
 # About tests
 
 In the Frontend we should only be concerned with Functional Tests (closely related to Integration Tests) written from
 the end user perspective, covering as much as possible from functionality, interaction and integration. As an example,
 when a button is clicked, does the state update? Or, does panel X appear? Or, is the navigation bar populated initially?
 
-All Javascript components should contain such functional tests stored in the *js/src/**/test/* folder. Structurally they
-are written in BDD-style: test(), expect(), describe()), it('should'), toBeString() etc.
+All Javascript components should contain such functional tests stored in the *js/src/**/test/* folder. They are using
+the Jest framework and preact-render-spy package is used to connect with Preact and allow Enzyme-style syntax written
+in BDD-style like test(), expect(), describe() it(should) etc.
 
-# Mocking static assets and stylesheets
+## Mocking in tests
+
+There are various ways you can mock parts of your code during testing:
+
+### Setting or mocking state and props
+
+First off, you need to be aware of the difference between shallow and deep testing. When shallow testing a child
+component, pass on its props like you would in the actual code:
+
+`const context = shallow(<ExampleItem items={ [{id: 'item 1'}, {id: 'item 2'}] } />);
+    const list = (context.find('#project-list'));
+    expect(list.find('li').length).toBe(2);`
+
+For deep testing a container or root component, you can specify how deep you want child components to render and simply
+set and test the (initial) state this way:
+
+`context.setState({
+    items: [
+        {id: 'item 1'},
+        {id: 'item 2'}
+    ]
+});
+expect(context.state()).toEqual({
+    items: [
+        {id: 'item 1'},
+        {id: 'item 2'}
+    ]`
+
+### Mocking a (parent) function
+
+You can use the jest mocking function. At the top of your test file, put:
+
+`jest.mock('../../../utils/showCurrentTime.js', () => jest.fn().mockReturnValue('12:34'));`
+
+This is mocking the actual import in your code and will return the specified output value.
+
+Now you can write your expect this way:
+
+`expect(context.find('span').at(0).text()).toBe('12:34');`
+
+### Mocking static assets and stylesheets
 
 You can mock the CSS imports and imports for other file types by using fileMocks and identity-obj-proxy
 
@@ -167,7 +219,7 @@ You can mock the CSS imports and imports for other file types by using fileMocks
     }
 }`
 
-# Mocking localStorage
+### Mocking localStorage
 
 You can also mock localStorage, using browserMocks.js:
 
@@ -199,14 +251,14 @@ and its configuration option in package.json:
 - "babel-eslint":                 used babel parser for linting
 - "babel-jest":                   used by the transformPreprocessor that converts JSX before running tests
 - "babel-loader":                 loads js during webpacks process
-- "babel-polyfill":
+- "babel-polyfill":               not all parts of the es6 spec can be transpiled to es5. you need this polyfill, too
 - "babel-preset-env":             allows transpiling es2015+ code to specified browser version (defaults to es5)
 - "babel-preset-preact":          allows handling of JSX during transpiling
 - "classnames":                   used to apply multiple classes to components
 - "clean-webpack-plugin":         cleans out folders before copying new files in during deploy
 - "compression-webpack-plugin":   used to gzip assets and files
 - "copy-webpack-plugin":          used to copy files over during deploy phase
-- "css-loader":                   loads css
+- "css-loader":                   loads css code encountered by webpack
 - "cssnano":                      compresses css and removes comments
 - "eslint":                       checks for javascript lint (CLI version)
 - "eslint-plugin-css-modules":    will check for unused css declarations
@@ -220,13 +272,14 @@ and its configuration option in package.json:
 - "postcss":                      framework for loading css extensions in webpack
 - "postcss-loader":               is able to load css and scss
 - "preact":                       the DOM manipulation library
+= "preact-async-route"            used to lazy load the components
 - "preact-cli":                   preact for cli, used by jest
 - "preact-compat":                react compatibility library for preact
 - "preact-render-spy":            collection of tools to facilitate jest testing
 - "preact-router":                routing framework
 - "precss":                       this is a module for postcss for mixins and nesting support
-- "react-redux":
-- "redux":
+- "react-redux":                  connects (p)react with redux
+- "redux":                        redux simplifies state management
 - "style-loader":                 loads the styles
 - "stylelint":                    checks for css lint (CLI version)
 - "uglifyjs-webpack-plugin":      uglifies, minifies javascript
@@ -241,6 +294,7 @@ which one cannot be found) this isnt going to work. More details: https://github
 external services is written using a Promise that calls the action when successful. This seems a better, safer approach.
 - You can build for production using yarn run build:prod. This changes the outcome of some of the configured tasks.
 - Note that in dev mode console will throw a warning invalid prop children supplied. Please ignore this for now.
+- To run a specific test, edit the "roots" key in package.json
 
 
 

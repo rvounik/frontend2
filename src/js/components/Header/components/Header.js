@@ -13,9 +13,6 @@ class Header extends Component {
         let navigationItems = [
             {
                 label: 'example-navigation-item', link:'/example'
-            },
-            {
-                label: 'example-navigation-item-2', link: '/exampler'
             }
         ];
 

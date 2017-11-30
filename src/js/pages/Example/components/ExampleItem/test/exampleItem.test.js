@@ -1,6 +1,9 @@
 import ExampleItem from '../components/ExampleItem';
 import { shallow } from 'preact-render-spy';
 
+// test examples: https://github.com/mzgoddard/preact-render-spy/blob/master/src/shared-render.test.js
+// cheat sheet: https://devhints.io/jest
+
 test('check if ExampleItem is rendering', () => {
     const context = shallow(<ExampleItem/>);
 

@@ -16,12 +16,10 @@ import { createStore, combineReducers } from 'redux'
 
 // import all reducers
 import exampleReducer from './pages/Example/reducers/example';
-import examplerReducer from './pages/Exampler/reducers/exampler';
 
 // combine into one
 const rootReducer = combineReducers({
-    exampleReducer,
-    examplerReducer
+    exampleReducer
 });
 
 // configure redux store with the combined reducers
@@ -30,12 +28,10 @@ let store = createStore(rootReducer);
 // import common css so it becomes available in all page components. also easier to have client specific css this way!
 import style from './../style/common.scss';
 
+
+// Asyncroute ensures the right component' js code is loaded when user requests the route, webpack does the splitting.
 function getExample(){
     return System.import('./pages/Example').then(module => module.default)
-}
-
-function getExampler(){
-    return System.import('./pages/Exampler').then(module => module.default)
 }
 
 import Header from './components/Header';
@@ -47,7 +43,6 @@ render(
             <main>
                 <Router>
                     <AsyncRoute path="/example" getComponent={ getExample } />
-                    <AsyncRoute path="/exampler" getComponent={ getExampler } />
                 </Router>
             </main>
         </section>
@@ -57,7 +52,7 @@ render(
 
 // this will show a console message depending on the environment the assets were built for
 if (process.env.NODE_ENV === "production") {
-    console.log('running in production mode');
+    // console.log('running in production mode');
 } else {
-    console.log('running in dev mode');
+    // console.log('running in dev mode');
 }

@@ -1,9 +1,12 @@
 jest.mock('../../../utils/showCurrentTime.js', () => jest.fn().mockReturnValue('12:34'));
 
+// test examples: https://github.com/mzgoddard/preact-render-spy/blob/master/src/shared-render.test.js
+// cheat sheet: https://devhints.io/jest
+
 import Example from '../components/Example';
 import { shallow } from 'preact-render-spy';
 
-test('check if ExampleItem is rendering', () => {
+test('check if Example is rendering', () => {
     const context = shallow(<Example/>);
 
     expect(context.find('span')).toBeTruthy();
