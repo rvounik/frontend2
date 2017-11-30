@@ -47,7 +47,7 @@ __Integration__
 
 # Quick start
 
-Just install, build and run the project. You will find commands for common tasks below:
+Just install, build and run the project. You will find commands for common tasks here:
 
 install dependencies:
 
@@ -79,10 +79,6 @@ deploy: (build, lint, test)
 
 # Todo
 
-- add tests for Example component
-- add ARIA support for visually impaired
-- figure out how not to load everything at once but lazy load the components that arent needed initially (prpl pattern)
-- add Dockerfile so a docker image can be built and frontend can run as a docker container
 - move repository to Githost
 - decide what to do with *Styleguide* (may I recommend merging into *Frontend*?)
 - implement *NeOn Frontend* (static content) on a per-page base
@@ -91,6 +87,7 @@ deploy: (build, lint, test)
 - figure out how application can load/show only the components the user is authorised for
 - refactor components that use Bootstrap classes and remove the dependency
 - replace command flow with API calls using Fetch
+- add ARIA support for visually impaired
 
 # Development
 
@@ -157,6 +154,12 @@ system imports and writes separate 0.js, 1.js etc. bundles for those. Because of
 the project into a PWA. This would only mean all split JS bundles are loaded right at the start. Then again, having a
 service-worker for a data-driven application like NeOn is perhaps a bit too much. Instead, implement the service-worker
 for specific parts of the application where offline usage makes sense, for example the questionnaire part.
+
+Technically the data for a component should be loaded when the component gets mounted Ideally I would use the React
+lifecycle methods for these. Remember, there is no initial state like in our old *Frontend*. This is no problem though,
+after loading data for the first time it will remain in the store, even when you navigate to different routes. The
+application will feel even snappier than it used to, thanks to the code splitting and heavily cut-down and compressed
+assets.
 
 # About tests
 
@@ -295,79 +298,3 @@ external services is written using a Promise that calls the action when successf
 - You can build for production using yarn run build:prod. This changes the outcome of some of the configured tasks.
 - Note that in dev mode console will throw a warning invalid prop children supplied. Please ignore this for now.
 - To run a specific test, edit the "roots" key in package.json
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-------------------------------------------------------------
-
-to-be-converted-to-notes:
-
-note on lazy loading and retrieving data:
-
-the components are lazy loaded. nothing is there initially: there is no initial state since we dont work with
-controllers. therefore the data in the application needs to load asynchronously. to do this, we will make more use
-of the lifecycle methods. every time a certain point in the application is reached that requires data, the component
-lifecycle method loads this data and the redux store keeps it.
-
-do you loose 'snappiness' ? I dont think so. once the data is there, it is displayed instantly, even after going to a
-different page/route/component and coming back this is snappier than it used to be in the old frontend, where each route
-required loading the data again. and sure enough, loading the page and views is faster, too. its instant once lazy
-loaded.
-
-
-// proposal organisations view data format thingie
-let organisationItems =
-[
-    selectedParentId: LTPROOT,
-    entities: [
-        [],
-        [],
-        [],
-    ]
-],
-[
-    selectedParentId: 123,
-    entities: [
-        [
-            type: project,
-            id: 123
-        ],
-        [
-            type: project,
-            id: 456
-        ],
-        [
-            type: project,
-            id: 789
-        ]
-    ]
-],
-[
-    selectedParentId: 456,
-    entities: [
-        [
-            type: jobfunction,
-            id: 987
-        ],
-    ]
-],
-
-// determines what content to show in detail panel
-let activeOrganisationItemId = 987;
-
-// determine from which point (column) the organisation view is rendered
-let startDisplayingFromOrganisationItem = 1;
-
