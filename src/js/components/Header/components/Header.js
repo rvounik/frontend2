@@ -11,7 +11,12 @@ class Header extends Component {
 
     render() {
         let navigationItems = [
-            { label: 'example-navigation-item', link:'/example' }
+            {
+                label: 'example-navigation-item', link:'/example'
+            },
+            {
+                label: 'example-navigation-item-2', link: '/exampler'
+            }
         ];
 
         return (<header className={ style.header }>

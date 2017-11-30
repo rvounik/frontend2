@@ -6374,6 +6374,10 @@ postcss@^6.0.1, postcss@^6.0.13:
     source-map "^0.6.1"
     supports-color "^4.4.0"
 
+preact-async-route@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/preact-async-route/-/preact-async-route-2.0.1.tgz#df1eb07be5eca9264d6749299a95b4a8fb37f6d2"
+
 preact-cli@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/preact-cli/-/preact-cli-1.4.1.tgz#13aae222baa0bc6310aeb629dc8255f838180626"
@@ -6453,6 +6457,10 @@ preact-compat@^3.14.3, preact-compat@^3.17.0:
     preact-transition-group "^1.1.0"
     prop-types "^15.5.8"
     standalone-react-addons-pure-render-mixin "^0.1.1"
+
+preact-lazy-route@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/preact-lazy-route/-/preact-lazy-route-1.0.1.tgz#dabb16b5a05982ba25be7c08acd918b6b711cd50"
 
 preact-render-spy@1.1.0:
   version "1.1.0"

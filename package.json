@@ -29,6 +29,7 @@
         "postcss": "^6.0.13",
         "postcss-loader": "^2.0.8",
         "preact": "^8.2.6",
+        "preact-async-route": "^2.0.1",
         "preact-cli": "^1.4.1",
         "preact-compat": "^3.17.0",
         "preact-render-spy": "1.1.0",
@@ -68,7 +69,9 @@
             "^react-addons-css-transition-group$": "preact-css-transition-group"
         },
         "testEnvironment": "jsdom",
-        "roots": ["src/js"]
+        "roots": [
+            "src/js"
+        ]
     },
     "scripts": {
         "test": "jest --no-cache",

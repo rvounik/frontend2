@@ -43,7 +43,8 @@ module.exports = {
         // here you configure where (and how) the bundled files will be stored
         path: paths.DIST,
         filename: 'js/[name].js',
-        sourceMapFilename: '[file].map'
+        sourceMapFilename: '[file].map',
+        //chunkFilename: 'js/[name].[chunkhash].js'
     },
     devtool: sourceMapsEnabled ? 'cheap-module-eval-source-map' : false,
     module: {

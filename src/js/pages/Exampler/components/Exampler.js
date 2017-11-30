@@ -3,11 +3,11 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import ExampleItem from './ExampleItem/components/ExampleItem.js';
+import ExamplerItem from './ExamplerItem/components/ExamplerItem.js';
 import showCurrentTime from '../../../utils/showCurrentTime.js';
-import style from './../style/example.scss';
+import style from '../style/exampler.scss';
 
-export default class Example extends Component {
+export default class Exampler extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,7 +16,7 @@ export default class Example extends Component {
         let { items, addRandomItem } = this.props;
 
         // you can wrap this in a const or a condition if required
-        const exampleItem = <ExampleItem
+        const examplerItem = <ExamplerItem
             items={ items }
             addRandomItem={ addRandomItem }
         />;
@@ -26,8 +26,9 @@ export default class Example extends Component {
         return (
             <section className={ style.example }>
                 <span>{ someDate }</span>
+                this is component 2 which is supposed to be lazy-loaded
                 <section>
-                    { exampleItem }
+                    { examplerItem }
                 </section>
             </section>
         )

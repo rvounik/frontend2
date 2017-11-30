@@ -230,7 +230,7 @@ and its configuration option in package.json:
 - "style-loader":                 loads the styles
 - "stylelint":                    checks for css lint (CLI version)
 - "uglifyjs-webpack-plugin":      uglifies, minifies javascript
-- "webpack":                      webpack is an advanced task runner
+- "webpack":                      webpack is an advanced module bundler / task runner
 
 
 # Notes
