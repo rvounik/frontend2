@@ -36,7 +36,7 @@ __Performance__
 
 - Much faster delivery using Gzipped assets and lazy loading
 - Much faster building of assets (and no more syncing issues?)
-- Synchronous fetching (with proper error handling) but asynchronous DOM updates (without ghosting)
+- Asynchronous fetching of data (with proper error handling), asynchronous DOM updates (without ghosting)
 
 __Integration__
 
@@ -118,9 +118,9 @@ index.js to avoid confusion with presentational components and ease importing.
 The presentational component is concerned with the actual layout. Has its own css, and its own component methods. This
 is where you would store child components and methods that deal with presentation (ie tabs, modals, panels, sorting).
 Keep in mind that it is allowed to import generic components from the *src/js/components* folder if required. Likewise it
-is possible to import generic methods from the *src/js/utils* folder if needed. These components need to be as small and
+is possible to import generic functions from the *src/js/utils* folder if needed. These components need to be as small and
 simple as possible! All non-UI logic needs to be defined in the container component! UI-logic can be stored in a local
-state which I would call localState to avoid confusing with the 'real' state.
+state which I would call localState to avoid confusion with the 'real' state.
 
 __Stylesheets__
 
@@ -134,10 +134,10 @@ available just for that specific component. This means: no more conflicts, speci
 Because of this, selector names can be very simple although I'd still recommend sticking to BEM naming conventions.
 
 Keep in mind that every child component requires its own style import on top. Without this, no CSS is assigned to that
-component. Also, specifically importing CSS will just assign the global selectors from it. To be able to use your own,
-custom selectors you will need to refer to your imported styles in your elements. For example:
+component. Also, specifically importing CSS will just assign the global selectors (h1, section, li) from it. To be able to use your own,
+custom selectors (.something, .listView) you will need to refer to your imported styles in your elements. For example:
 
-`import style from './../style/someMasterComponentStylesheet.css`
+`import style from './../style/someStylesheet.css`
 
 `<someElement className={ style.someCustomSelector }`
 
@@ -149,9 +149,10 @@ differently). Note however that you can only use the *@import* directive in .scs
 The preact-async-route package is used to lazy-load components. Instead of importing every component in App.js, define
 functions that load the specific component when the user requests the route. Webpack automatically recognises these
 system imports and writes separate 0.js, 1.js etc. bundles for those. Because of this, it doesnt make much sense to turn
-the project into a PWA. This would only mean all split JS bundles are loaded right at the start.
+the project into a PWA. This would only mean all split JS bundles are loaded right at the start by the service-worker,
+making the lazy-load logic useless.
 
-But then, having a service-worker for a data-driven application like NeOn is perhaps a bit useless. Instead, implement
+But then, having a service-worker for a data-driven application like NeOn is perhaps a bit useless altogether. Instead, implement
 the service-worker a specific parts in the application where offline usage makes sense, for example the questionnaires.
 
 ### Loading of data
@@ -170,11 +171,11 @@ when a button is clicked, does the state update? Or, does panel X appear? Or, is
 
 All Javascript components should contain such functional tests and they should be stored in the *js/src/**/test/*
 folder. They are using the Jest testing framework together with the preact-render-spy package to integrate with Preact.
-Tests are written in BDD-style: test(), expect(), describe() it(should) etc. You can use basic Enzyme-style assertions.
+Tests are written in BDD-style: test(), expect(), describe() it(should) etc. You can use basic Enzyme-style syntax.
 
 ## Mocking in tests
 
-There are various ways you can mock parts of your code during testing:
+There are various ways you can mock parts of your code for testing purposes:
 
 ##### Setting or mocking state and props
 
@@ -299,5 +300,5 @@ external services is written using a Promise that calls the action when successf
 - You can build for production using yarn run build:prod. This changes the outcome of some of the configured tasks.
 - Note that in dev mode console will throw a warning invalid prop children supplied. Please ignore this for now.
 - To run a specific test, edit the "roots" key in package.json
-- Note that *src/js/utils/common.js* gets executed on page load. Useful for some third-party libraries!)
+- Note that *src/js/utils/common.js* gets executed on page load. Useful for some third-party libraries!
 - Configuration for the ES and CSS linter can be found in the root of the project.
