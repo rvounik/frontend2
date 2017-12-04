@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from './../Header';
 import { shallow, deep } from 'preact-render-spy';
 
 // test examples: https://github.com/mzgoddard/preact-render-spy/blob/master/src/shared-render.test.js

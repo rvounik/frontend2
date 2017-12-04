@@ -3,9 +3,9 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import ExampleItem from './ExampleItem/components/ExampleItem.js';
-import showCurrentTime from '../../../utils/showCurrentTime.js';
-import style from './../style/example.scss';
+import ExampleItem from './components/ExampleItem/ExampleItem';
+import showCurrentTime from '../../../../utils/showCurrentTime.js';
+import style from './style/example.scss';
 
 export default class Example extends Component {
     constructor(props) {

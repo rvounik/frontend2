@@ -1,4 +1,4 @@
-import ExampleItem from '../components/ExampleItem';
+import ExampleItem from '../ExampleItem';
 import { shallow } from 'preact-render-spy';
 
 // test examples: https://github.com/mzgoddard/preact-render-spy/blob/master/src/shared-render.test.js

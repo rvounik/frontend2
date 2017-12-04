@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import style from './../style/header.scss';
-import Navigation from './Navigation/js/Navigation';
+import style from './style/header.scss';
+import Navigation from './../Navigation/Navigation';
 
 class Header extends Component {
     constructor() {

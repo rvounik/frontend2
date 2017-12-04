@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 import * as exampleActions from './actions/example'
 
-import Example from './components/Example'
+import Example from './components/Example/Example'
 
 class Index extends Component {
     constructor(props) {

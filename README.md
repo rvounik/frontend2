@@ -144,6 +144,14 @@ custom selectors you will need to refer to your imported styles in your elements
 You can import any CSS type (CSS, SCSS, SASS) and don't even need to specify the extension (though your IDE may think
 differently). Note however that you can only use the *@import* directive in .scss files to import another .scss file.
 
+# About Redux
+
+Redux is a JavaScript library that aims to simplify how we manage stateful data. Redux keeps all of our data in a single
+JS object called the Store. A single function, the reducer, is responsible for making modifications to the Store. We
+trigger the reducer by 'dispatching' an action - a JS object that describes how our data should change. The reducer
+function receives the action as an argument and makes changes accordingly. Other parts of the code (usually React
+Components) can subscribe to data in the Store. When data changes, Redux notifies subscribers of the change
+
 # About lazy-loading
 
 The preact-async-route package is used to lazy-load components. Instead of importing every component in App.js, define

@@ -3,7 +3,7 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
-import style from './../style/exampleitem.scss';
+import style from './style/exampleitem.scss';
 
 export default class ExampleItem extends Component {
     constructor(props) {
