@@ -7,8 +7,8 @@ Rebuild the current LTP *Frontend* as a standalone Javascript SPA with the follo
 
 __Deployment__
 
-- Webpack for task automation / bundling of files
-- NPM Scripts instead of Gulp / Grunt
+- Webpack for bundling of files and definition of tasks
+- NPM Scripts instead of Gulp / Grunt for global tasks (test, lint, deploy)
 - Yarn instead of NPM (faster and improved caching of dependencies)
 - JS and CSS code is bundled, uglified, minified
 - Sourcemaps for JS and CSS
@@ -16,8 +16,8 @@ __Deployment__
 __HTML and CSS__
 
 - Behaves like a Progressive Web Application (following manifest)
-- Fully HTML5, CSS3 compliant (using feature queries instead of modernizr)
 - Preconfigured to work offline (service-worker)
+- Fully HTML5, CSS3 compliant (using feature queries instead of modernizr)
 - CSS modules (CSS locally scoped and imported by the JS component)
 - support for CSS, SCSS, SASS
 - PostCSS with NextCSS, Autoprefixer, CSSNano (and most SASS-like features)
@@ -37,6 +37,8 @@ __Performance__
 - Much faster delivery using Gzipped assets and lazy loading
 - Much faster building of assets (and no more syncing issues?)
 - Asynchronous fetching of data (with proper error handling), asynchronous DOM updates (without ghosting)
+- Solve the browser caching issue
+- Allow writing functional tests following Enzyme syntax with Jest as test runner (and render-spy as a helper)
 
 __Integration__
 
@@ -87,7 +89,6 @@ deploy: (build, lint, test)
 - figure out how application can load/show only the components the user is authorised for
 - refactor components that use Bootstrap classes and remove the dependency
 - replace command flow with API calls using Fetch
-- add ARIA support for visually impaired
 
 # Development
 
@@ -276,11 +277,12 @@ and its configuration option in package.json:
 - "eslint":                       checks for javascript lint (CLI version)
 - "eslint-plugin-css-modules":    will check for unused css declarations
 - "eslint-plugin-jest":           contains linting support for jest
+- "eslint-plugin-jsx-a11y":       detects accessibility issues during linting
 - "eslint-plugin-react":          contains linting support for react
 - "extract-text-webpack-plugin":  allows extracting css imports from js components
 - "file-loader":                  used to be able to load files in webpack
 - "if-env":                       can be used to switch functionality per environment
-- "jest":                         used to run test from commandline
+- "jest":                         test runner for command line
 - "jest-css-modules":             this solves a lot of issues with css modules not being recognised by jest
 - "postcss":                      framework for loading css extensions in webpack
 - "postcss-loader":               is able to load css and scss

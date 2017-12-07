@@ -13,8 +13,11 @@ export default function exampleReducer(state = initialState, action) {
     switch (action.type) {
         // attempt to match the action type from the action.type parameter received from the action
         case actionType.ADD_RANDOM_ITEM:
-            // copy the state (you cannot mutate the state directly)
+            // copy the state (state is immutable object by JS design)
             let newState = Object.assign({}, state);
+
+            // todo: investigate why spread operator not working:
+            // let newState = { ...state };
 
             // create temporary new array
             let existingItems = [];

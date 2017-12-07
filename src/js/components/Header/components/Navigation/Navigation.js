@@ -13,8 +13,6 @@ export default class Navigation extends Component {
         let navigationItems = [];
         let { items } = this.props;
 
-        console.log(items);
-
         items.map((item) => {
             let navigationItem = <NavigationItem label={ item.label } link={ item.link } key={ item.label } />;
 

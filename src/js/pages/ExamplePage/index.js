@@ -23,16 +23,23 @@ class Index extends Component {
         );
     }
 
+    componentWillMount() {
+        // update the page title for accessibility reasons
+        document.title = 'Example';
+    }
+
     // note: since this is the container component, everything that deals with data should be defined right here
     // this can be wrapped inside an action, but since its asynchronous you'd need middleware like thunk
     // alternatively define a method that is asynchronous itself and call the action whenever the request was successful
 
     addRandomItem() {
-        fetch('https://httpbin.org/uuid').then(response => {
+        let url = 'https://httpbin.org/uuid';
+
+        fetch(url, {mode: "cors", method: "get"}).then(response => {
             if (response.ok) {
                 // response.json() is not available yet. wrap it in a promise:
                 response.json().then((response) => {
-                    this.actions.addRandomItem(response.uuid);
+                   this.actions.addRandomItem(response.uuid);
                 }).catch(error => {
                     return Promise.reject(console.log('JSON error: ' + error.message));
                 });

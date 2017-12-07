@@ -2,11 +2,13 @@ module.exports = {
     "parser": "babel-eslint",
     "extends": [
         "eslint:recommended",
+        "plugin:jsx-a11y/recommended",
         "plugin:css-modules/recommended"
     ],
     "plugins": [
         "react",
         "jest",
+        "jsx-a11y",
         "css-modules"
     ],
     "env": {

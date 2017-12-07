@@ -15,7 +15,7 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 
 // import all reducers
-import exampleReducer from './pages/Example/reducers/example';
+import exampleReducer from './pages/ExamplePage/reducers/example';
 
 // combine into one
 const rootReducer = combineReducers({
@@ -30,8 +30,8 @@ import style from './../style/common.scss';
 
 
 // Asyncroute ensures the right component' js code is loaded when user requests the route, webpack does the splitting.
-function getExample(){
-    return System.import('./pages/Example').then(module => module.default)
+function getExamplePage(){
+    return System.import('./pages/ExamplePage').then(module => module.default)
 }
 
 import Header from './components/Header';
@@ -42,7 +42,7 @@ render(
             <Header key="header" />
             <main>
                 <Router>
-                    <AsyncRoute path="/example" getComponent={ getExample } />
+                    <AsyncRoute path="/example" getComponent={ getExamplePage } />
                 </Router>
             </main>
         </section>
