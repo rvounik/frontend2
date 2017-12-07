@@ -40,13 +40,6 @@ __Performance__
 - Solve the browser caching issue
 - Allow writing functional tests following Enzyme syntax with Jest as test runner (and render-spy as a helper)
 
-__Integration__
-
-- Communicates (using Fetch, instead of Ajax) with *Section Field* endpoints
-- Replaces current *Frontend* (and, if possible, *Styleguide*)
-- Has a way to implement access rights (roles) and translations
-- Can automate building of forms based on *Section Field* configuration
-
 # Quick start
 
 Just install, build and run the project. You will find commands for common tasks here:
@@ -78,17 +71,6 @@ lint:
 deploy: (build, lint, test)
 
 `yarn run deploy`
-
-# Todo
-
-- move repository to Githost
-- decide what to do with *Styleguide* (may I recommend merging into *Frontend*?)
-- implement *NeOn Frontend* (static content) on a per-page base
-- refactor views using CSS Grid Layout
-- figure out where the translations are loaded from
-- figure out how application can load/show only the components the user is authorised for
-- refactor components that use Bootstrap classes and remove the dependency
-- replace command flow with API calls using Fetch
 
 # Development
 
