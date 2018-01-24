@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 /** @jsx h */
 
+// some comment
 import Header from './components/Header/Header'
 
 class Index extends Component {
